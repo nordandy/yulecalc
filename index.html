@@ -10,7 +10,7 @@
         * { box-sizing: border-box; }
 
         body {
-            background-color: #111;
+            background-color: #e6e6e6; 
             margin: 0;
             height: 100vh;
             display: flex;
@@ -27,6 +27,10 @@
             width: min(100%, 450px, 95vh * (235.3 / 396.6));
             position: relative;
             container-type: size; 
+            
+            /* ÄNDRAD HÄR: 0 0 gör att skuggan sprids jämnt åt alla håll */
+            box-shadow: 0 0 60px rgba(0,0,0,0.25);
+            border-radius: 30px; 
         }
 
         svg {
@@ -37,16 +41,14 @@
         
         image { pointer-events: none; }
 
-        /* --- DISPLAY LAGER --- */
         .display-overlay {
             position: absolute;
             font-family: 'VT323', monospace;
             z-index: 20; 
-            color: #ff4444;
+            color: #ff4d22; 
             pointer-events: none; 
         }
 
-        /* --- TOPP-DISPLAY (MARQUEE) --- */
         #top-display-container {
             left: 4.1%; 
             top: 1.7%; 
@@ -56,9 +58,9 @@
             display: flex;
             align-items: center;
             padding-top: 3%; 
-            
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10px, black calc(100% - 10px), transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0%, black 10px, black calc(100% - 10px), transparent 100%);
+            background-color: transparent; 
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
         }
 
         .marquee-wrapper {
@@ -80,18 +82,20 @@
             transition-property: transform;
         }
 
+        /* Loggorna är ljusa/lysande */
         .tengbom-logo {
             height: 55%; 
             width: auto;
-            fill: #a83e3e; 
+            fill: #ff4d22; 
             flex-shrink: 0; 
             padding: 0 2cqw;
             aspect-ratio: 737.1 / 141.7;
         }
         
+        /* Texten är mörkröd */
         .marquee-text {
             font-size: 5.5cqw;
-            color: #a83e3e;
+            color: #b33619; 
             line-height: 1.2;
             display: flex; 
             align-items: center;
@@ -99,7 +103,6 @@
             margin: 0 5cqw;
         }
 
-        /* --- HUVUD-DISPLAY --- */
         #main-display-container {
             left: 4.1%; 
             top: 24.3%; 
@@ -108,11 +111,12 @@
             padding: 1.5% 0 3% 0; 
             display: flex;
             flex-direction: column;
+            background-color: transparent; 
         }
 
         #history-line {
             font-size: 4cqw; 
-            color: #a83e3e; 
+            color: #b33619; 
             width: 100%;
             text-align: right;
             white-space: nowrap;
@@ -120,7 +124,7 @@
             text-overflow: ellipsis;
             line-height: 1.2;
             flex-shrink: 0;
-            border-bottom: 1px solid rgba(168, 62, 62, 0.4);
+            border-bottom: 1px solid rgba(179, 54, 25, 0.4);
             padding-right: 5%; 
             padding-bottom: 1.5%; 
             margin-bottom: 2%;
@@ -130,6 +134,7 @@
         }
         
         #history-line.visible { opacity: 1; }
+        #history-line.hidden-border { border-bottom: none !important; }
 
         #result-area {
             flex-grow: 1;
@@ -139,13 +144,13 @@
             pointer-events: auto; 
             z-index: 50; 
             padding: 0 5% 0 4%;
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10px, black calc(100% - 10px), transparent 100%);
-            mask-image: linear-gradient(to bottom, transparent 0%, black 10px, black calc(100% - 10px), transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%);
         }
 
         #result-content {
-            font-size: 6cqw;
-            color: #ff4444;
+            font-size: 5.0cqw; 
+            color: #ff4d22; 
             line-height: 1.2; 
             text-align: right;
             white-space: pre-wrap;
@@ -154,31 +159,50 @@
             margin-bottom: 0;
         }
         
-        /* Specialklass för påskägget */
         .easter-egg {
-            font-size: 8cqw !important; /* Större text */
-            text-align: center !important; /* Centrerad */
-            color: #ff4444;
-            text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+            font-size: 8cqw !important; 
+            text-align: center !important; 
+            color: #ff4d22; 
+            text-shadow: 0 0 5px rgba(255, 77, 34, 0.5);
             margin-top: auto;
-            margin-bottom: auto !important; /* Centrera vertikalt */
+            margin-bottom: auto !important; 
         }
 
         #result-area::-webkit-scrollbar { width: 6px; }
-        #result-area::-webkit-scrollbar-track { background: rgba(168, 62, 62, 0.1); margin: 5px 0; }
-        #result-area::-webkit-scrollbar-thumb { background: #a83e3e; border-radius: 4px; }
+        #result-area::-webkit-scrollbar-track { background: rgba(179, 54, 25, 0.1); margin: 5px 0; }
+        #result-area::-webkit-scrollbar-thumb { background: #b33619; border-radius: 4px; }
 
-        /* --- SNÖ & TOMTE --- */
+        .screen-bg {
+            fill: #140502; 
+            transition: fill 0.6s ease-in-out; 
+        }
+        
+        .container.off .screen-bg {
+            fill: #000000; 
+        }
+
         .snow-cross {
-            stroke: #ff4444;
+            stroke: #ff4d22;
             stroke-width: 1.5; 
             stroke-linecap: round;
             pointer-events: none;
         }
         .snow-pixel {
-            fill: #ff4444;
+            fill: #ff4d22;
             shape-rendering: crispEdges; 
             pointer-events: none;
+        }
+        
+        .pipe {
+            fill: #ff4d22; 
+            shape-rendering: crispEdges;
+        }
+        
+        .banner-char {
+            font-family: 'VT323', monospace;
+            font-size: 14px;
+            fill: #ff4d22;
+            text-anchor: middle;
         }
         
         #santa-sprite {
@@ -187,7 +211,6 @@
             image-rendering: pixelated; 
         }
 
-        /* --- KNAPPAR --- */
         .hitbox { 
             fill: rgba(255,255,255,0); 
             stroke: none; 
@@ -207,8 +230,8 @@
             transition: fill 0.1s;
         }
         #mute-light.lit {
-            fill: #ff0000; 
-            filter: drop-shadow(0 0 2px #ff0000);
+            fill: #ffffff; 
+            filter: drop-shadow(0 0 2px #ffffff);
         }
 
     </style>
@@ -219,6 +242,7 @@
     
     <div id="top-display-container" class="display-overlay">
         <div class="marquee-wrapper" id="marquee">
+            <!-- LOGO 1 -->
             <svg class="tengbom-logo" id="logo-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 737.1 141.7">
                 <path d="M530.8,68.8c6.4-3.2,12.5-10.1,12.5-19.1s-9.5-21.4-23.5-21.4h-14.8v7.8h12.2c10,0,16.6,5.8,16.6,14.5s-6.2,15.1-15.5,15.1h-13.3v7.8h16.2c11.7,0,19.4,6.7,19.4,15.9s-7.3,16.2-20.3,16.2h-15.3v7.9h17.3c17,0,27.9-10,27.9-23.3s-7.8-19.2-19.4-21.3Z"/>
                 <path d="M438.1,35.4c12.4,1.2,21.5,7.7,26.7,17h9.7c-6.6-15.1-19.5-24.3-36.4-25.6v8.6h0Z"/>
@@ -243,7 +267,11 @@
                 <rect x="170.2" y="28.4" width="65.4" height="8.4"/>
                 <rect x="488.2" y="28.4" width="9.6" height="85.1"/>
             </svg>
-            <span class="marquee-text">YULE CALC 3000 &copy; TENGBOM ARKITEKTER AB</span>
+            
+            <!-- TEXT -->
+            <span class="marquee-text">JULRIMSKALKYLATOR &copy; TENGBOM ARKITEKTER AB</span>
+            
+            <!-- LOGO 2 -->
             <svg class="tengbom-logo" id="logo-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 737.1 141.7">
                 <path d="M530.8,68.8c6.4-3.2,12.5-10.1,12.5-19.1s-9.5-21.4-23.5-21.4h-14.8v7.8h12.2c10,0,16.6,5.8,16.6,14.5s-6.2,15.1-15.5,15.1h-13.3v7.8h16.2c11.7,0,19.4,6.7,19.4,15.9s-7.3,16.2-20.3,16.2h-15.3v7.9h17.3c17,0,27.9-10,27.9-23.3s-7.8-19.2-19.4-21.3Z"/>
                 <path d="M438.1,35.4c12.4,1.2,21.5,7.7,26.7,17h9.7c-6.6-15.1-19.5-24.3-36.4-25.6v8.6h0Z"/>
@@ -281,11 +309,14 @@
     <svg version="1.1" viewBox="0 0 235.3 396.6" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <clipPath id="screen-mask">
-                <rect x="9.6" y="96.4" width="216" height="108.6" />
+                <path d="M9.6,96.4c-.4,0-.9.1-1.3.3-.9.5-1.5,1.5-1.5,2.5v108.6c0,1.6,1.3,2.8,2.8,2.8h216c1.6,0,2.8-1.3,2.8-2.8h0v-108.6c0-.4-.1-.9-.3-1.3-.5-.9-1.5-1.5-2.5-1.5H9.6Z" />
             </clipPath>
         </defs>
 
-        <image href="christmas_calculator.png" x="0" y="0" width="235.3" height="396.6" />
+        <image href="assets/christmas_calculator.png" x="0" y="0" width="235.3" height="396.6" />
+        
+        <path class="screen-bg" d="M9.6,6.8h126.3c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8h0V9.6c0-1.6,1.3-2.8,2.8-2.8h0" />
+        <path class="screen-bg" d="M9.6,96.4c-.4,0-.9.1-1.3.3-.9.5-1.5,1.5-1.5,2.5v108.6c0,1.6,1.3,2.8,2.8,2.8h216c1.6,0,2.8-1.3,2.8-2.8h0v-108.6c0-.4-.1-.9-.3-1.3-.5-.9-1.5-1.5-2.5-1.5H9.6Z" />
 
         <circle id="mute-light" cx="28" cy="89.6" r="1.9"/>
 
@@ -294,15 +325,18 @@
             <circle class="hitbox hitbox-shadow" cx="72.8" cy="72.8" r="12.5" onclick="connectNorthPole()" />
             <circle class="hitbox hitbox-shadow" cx="117.6" cy="72.8" r="12.5" onclick="showHelp()" />
 
-            <path class="hitbox hitbox-shadow" onclick="input(7)" d="M54.4,212.9h36.9c1.6,0,2.8,1.3,2.8,2.8h0v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8"/>
-            <path class="hitbox hitbox-shadow" onclick="input(8)" d="M99.2,212.9h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
-            <path class="hitbox hitbox-shadow" onclick="input(9)" d="M9.6,212.9h36.9c1.6,0,2.8,1.3,2.8,2.8h0v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
-            <path class="hitbox hitbox-shadow" onclick="input(4)" d="M54.4,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8"/>
-            <path class="hitbox hitbox-shadow" onclick="input(5)" d="M99.2,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8"/>
-            <path class="hitbox hitbox-shadow" onclick="input(6)" d="M9.6,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
-            <path class="hitbox hitbox-shadow" onclick="input(1)" d="M54.4,302.5h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8"/>
-            <path class="hitbox hitbox-shadow" onclick="input(2)" d="M99.2,302.5h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8"/>
-            <path class="hitbox hitbox-shadow" onclick="input(3)" d="M9.6,302.5h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            <path class="hitbox hitbox-shadow" onclick="input(7)" d="M9.6,212.9h36.9c1.6,0,2.8,1.3,2.8,2.8h0v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            <path class="hitbox hitbox-shadow" onclick="input(8)" d="M54.4,212.9h36.9c1.6,0,2.8,1.3,2.8,2.8h0v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8"/>
+            <path class="hitbox hitbox-shadow" onclick="input(9)" d="M99.2,212.9h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            
+            <path class="hitbox hitbox-shadow" onclick="input(4)" d="M9.6,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            <path class="hitbox hitbox-shadow" onclick="input(5)" d="M54.4,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            <path class="hitbox hitbox-shadow" onclick="input(6)" d="M99.2,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            
+            <path class="hitbox hitbox-shadow" onclick="input(1)" d="M9.6,302.5h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            <path class="hitbox hitbox-shadow" onclick="input(2)" d="M54.4,302.5h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8"/>
+            <path class="hitbox hitbox-shadow" onclick="input(3)" d="M99.2,302.5h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            
             <path class="hitbox hitbox-shadow" onclick="input(0)" d="M99.2,347.3h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8"/>
 
             <circle class="hitbox hitbox-shadow" onclick="action('CLEAR')" cx="162.5" cy="234.2" r="12.5" />
@@ -315,8 +349,19 @@
         </g>
 
         <g clip-path="url(#screen-mask)">
+            <g id="flappy-background"></g>
             <g id="snow-layer"></g>
-            <image id="santa-sprite" href="santa_frame_1.png" width="80" height="40" />
+            
+            <g id="santa-group" style="display:none; pointer-events:none;">
+                <g id="santa-banner-group"></g>
+                <image id="santa-sprite" href="assets/santa_frame_1.png" width="80" height="40" />
+            </g>
+            
+            <g id="game-overlay" style="display:none; pointer-events:none;">
+                <rect x="9.6" y="96.4" width="216" height="108.6" fill="rgba(0,0,0,0.7)" />
+                <text x="117" y="145" text-anchor="middle" fill="#ff4d22" font-family="VT323" font-size="24">FLAPPY SANTA</text>
+                <text x="117" y="165" text-anchor="middle" fill="#ff4d22" font-family="VT323" font-size="14">TRYCK [+] FÖR ATT STARTA</text>
+            </g>
         </g>
 
         <circle id="lever-knob" cx="18.5" cy="368.5" r="4.5" style="fill:#333; stroke:none;" />
