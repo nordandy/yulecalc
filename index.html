@@ -11,7 +11,7 @@
 
         body {
             margin: 0;
-            height: 100dvh; /* Viktigt för mobilens adressfält */
+            height: 100dvh; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,41 +19,36 @@
             font-family: 'Inter', sans-serif;
             user-select: none;
             -webkit-user-select: none;
-
-            /* --- DESKTOP STANDARD --- */
-            /* Tillbaka till den mörkare grå bakgrunden */
-            background-color: #e6e6e6; 
+            background-color: #e6e6e6; /* Desktop bakgrund */
         }
 
         .container {
             aspect-ratio: 235.3 / 396.6;
-            
-            /* --- DESKTOP STANDARD --- */
-            /* Tillbaka till 450px max-bredd så den inte känns för stor */
             width: min(100%, 450px, 95vh * (235.3 / 396.6));
-            
             position: relative;
             container-type: size; 
-            
-            /* Skugga runt om (desktop) */
             box-shadow: 0 0 60px rgba(0,0,0,0.25);
             border-radius: 30px; 
         }
 
-        /* --- MOBIL-ANPASSNING (Sömlöst läge) --- */
+        /* Hantering av bakgrundsbilder */
+        .bg-desktop { display: block; }
+        .bg-mobile { display: none; }
+
+        /* --- MOBIL-ANPASSNING --- */
         @media (max-width: 600px) {
             body {
-                /* Matchar kalkylatorns ramfärg exakt */
-                background-color: #e0e2e4;
+                background-color: #e0e2e4; /* Sömlös färg */
             }
             
             .container {
-                /* Tar bort skuggan så den smälter in */
                 box-shadow: none;
-                
-                /* Tillåter den att ta lite mer plats på bredden i mobilen */
                 width: min(100%, 100dvh * (235.3 / 396.6));
             }
+
+            /* Byt bild på mobil */
+            .bg-desktop { display: none; }
+            .bg-mobile { display: block; }
         }
 
         svg {
@@ -334,7 +329,9 @@
             </clipPath>
         </defs>
 
-        <image href="assets/christmas_calculator.png" x="0" y="0" width="235.3" height="396.6" />
+        <!-- BILDHANTERING: Två bilder laddas, CSS bestämmer vilken som syns beroende på skärm -->
+        <image class="bg-desktop" href="assets/christmas_calculator.png" x="0" y="0" width="235.3" height="396.6" />
+        <image class="bg-mobile" href="assets/christmas_calculator_mobile.png" x="0" y="0" width="235.3" height="396.6" />
         
         <path class="screen-bg" d="M9.6,6.8h126.3c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8h0V9.6c0-1.6,1.3-2.8,2.8-2.8h0" />
         <path class="screen-bg" d="M9.6,96.4c-.4,0-.9.1-1.3.3-.9.5-1.5,1.5-1.5,2.5v108.6c0,1.6,1.3,2.8,2.8,2.8h216c1.6,0,2.8-1.3,2.8-2.8h0v-108.6c0-.4-.1-.9-.3-1.3-.5-.9-1.5-1.5-2.5-1.5H9.6Z" />
@@ -351,7 +348,7 @@
             <path class="hitbox hitbox-shadow" onclick="input(9)" d="M99.2,212.9h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
             
             <path class="hitbox hitbox-shadow" onclick="input(4)" d="M9.6,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
-            <path class="hitbox hitbox-shadow" onclick="input(5)" d="M54.4,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            <path class="hitbox hitbox-shadow" onclick="input(5)" d="M54.4,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
             <path class="hitbox hitbox-shadow" onclick="input(6)" d="M99.2,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
             
             <path class="hitbox hitbox-shadow" onclick="input(1)" d="M9.6,302.5h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
@@ -365,7 +362,9 @@
             <circle class="hitbox hitbox-shadow" onclick="action('BACK')" cx="162.5" cy="278.9" r="12.5" />
             <circle class="hitbox hitbox-shadow" onclick="action('RANDOM')" cx="207.3" cy="278.9" r="12.5" />
 
-            <path class="hitbox hitbox-shadow" onclick="action('ADD')" d="M207.2,311.3c6.9,0,12.5,5.6,12.5,12.5s-5.6,12.5-12.5,12.5h-44.8c-6.9,0-12.5-5.6-12.5-12.5s5.6-12.5,12.5-12.5h44.8Z" />
+            <!-- TURBO-KNAPP: ontouchstart fixar latency på mobil! -->
+            <path class="hitbox hitbox-shadow" onclick="action('ADD')" ontouchstart="event.preventDefault(); action('ADD')" d="M207.2,311.3c6.9,0,12.5,5.6,12.5,12.5s-5.6,12.5-12.5,12.5h-44.8c-6.9,0-12.5-5.6-12.5-12.5s5.6-12.5,12.5-12.5h44.8Z" />
+            
             <path class="hitbox hitbox-shadow" onclick="generateRhyme()" d="M207.2,356.1c6.9,0,12.5,5.6,12.5,12.5s-5.6,12.5-12.5,12.5h-44.8c-6.9,0-12.5-5.6-12.4-12.5,0-6.9,5.6-12.4,12.4-12.4h44.8Z" />
         </g>
 
