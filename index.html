@@ -10,9 +10,8 @@
         * { box-sizing: border-box; }
 
         body {
-            background-color: #e6e6e6; 
             margin: 0;
-            height: 100vh;
+            height: 100dvh; /* Viktigt för mobilens adressfält */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,17 +19,41 @@
             font-family: 'Inter', sans-serif;
             user-select: none;
             -webkit-user-select: none;
+
+            /* --- DESKTOP STANDARD --- */
+            /* Tillbaka till den mörkare grå bakgrunden */
+            background-color: #e6e6e6; 
         }
 
         .container {
             aspect-ratio: 235.3 / 396.6;
+            
+            /* --- DESKTOP STANDARD --- */
+            /* Tillbaka till 450px max-bredd så den inte känns för stor */
             width: min(100%, 450px, 95vh * (235.3 / 396.6));
+            
             position: relative;
             container-type: size; 
             
-            /* ÄNDRAD HÄR: 0 0 gör att skuggan sprids jämnt åt alla håll */
+            /* Skugga runt om (desktop) */
             box-shadow: 0 0 60px rgba(0,0,0,0.25);
             border-radius: 30px; 
+        }
+
+        /* --- MOBIL-ANPASSNING (Sömlöst läge) --- */
+        @media (max-width: 600px) {
+            body {
+                /* Matchar kalkylatorns ramfärg exakt */
+                background-color: #e0e2e4;
+            }
+            
+            .container {
+                /* Tar bort skuggan så den smälter in */
+                box-shadow: none;
+                
+                /* Tillåter den att ta lite mer plats på bredden i mobilen */
+                width: min(100%, 100dvh * (235.3 / 396.6));
+            }
         }
 
         svg {
@@ -82,7 +105,6 @@
             transition-property: transform;
         }
 
-        /* Loggorna är ljusa/lysande */
         .tengbom-logo {
             height: 55%; 
             width: auto;
@@ -92,7 +114,6 @@
             aspect-ratio: 737.1 / 141.7;
         }
         
-        /* Texten är mörkröd */
         .marquee-text {
             font-size: 5.5cqw;
             color: #b33619; 
@@ -330,7 +351,7 @@
             <path class="hitbox hitbox-shadow" onclick="input(9)" d="M99.2,212.9h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
             
             <path class="hitbox hitbox-shadow" onclick="input(4)" d="M9.6,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
-            <path class="hitbox hitbox-shadow" onclick="input(5)" d="M54.4,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            <path class="hitbox hitbox-shadow" onclick="input(5)" d="M54.4,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
             <path class="hitbox hitbox-shadow" onclick="input(6)" d="M99.2,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
             
             <path class="hitbox hitbox-shadow" onclick="input(1)" d="M9.6,302.5h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
