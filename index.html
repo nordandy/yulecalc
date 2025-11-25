@@ -19,26 +19,31 @@
             font-family: 'Inter', sans-serif;
             user-select: none;
             -webkit-user-select: none;
-            background-color: #e6e6e6; /* Desktop bakgrund */
+            
+            /* Desktop bakgrund (mörkare grå) */
+            background-color: #e6e6e6; 
         }
 
         .container {
             aspect-ratio: 235.3 / 396.6;
+            /* Desktop storlek */
             width: min(100%, 450px, 95vh * (235.3 / 396.6));
             position: relative;
             container-type: size; 
+            /* Desktop skugga */
             box-shadow: 0 0 60px rgba(0,0,0,0.25);
             border-radius: 30px; 
         }
 
-        /* Hantering av bakgrundsbilder */
+        /* Bildhantering */
         .bg-desktop { display: block; }
         .bg-mobile { display: none; }
 
         /* --- MOBIL-ANPASSNING --- */
         @media (max-width: 600px) {
             body {
-                background-color: #e0e2e4; /* Sömlös färg */
+                /* Matchar ramens färg för sömlös look */
+                background-color: #e0e2e4; 
             }
             
             .container {
@@ -46,7 +51,6 @@
                 width: min(100%, 100dvh * (235.3 / 396.6));
             }
 
-            /* Byt bild på mobil */
             .bg-desktop { display: none; }
             .bg-mobile { display: block; }
         }
@@ -63,7 +67,7 @@
             position: absolute;
             font-family: 'VT323', monospace;
             z-index: 20; 
-            color: #ff4d22; 
+            color: #ECB328; /* NY LJUSARE HÖSTFÄRG */
             pointer-events: none; 
         }
 
@@ -100,10 +104,11 @@
             transition-property: transform;
         }
 
+        /* TEMA: HÖST (Uppljusad) */
         .tengbom-logo {
             height: 55%; 
             width: auto;
-            fill: #ff4d22; 
+            fill: #ECB328; /* NY LJUSARE HÖSTFÄRG */
             flex-shrink: 0; 
             padding: 0 2cqw;
             aspect-ratio: 737.1 / 141.7;
@@ -111,7 +116,7 @@
         
         .marquee-text {
             font-size: 5.5cqw;
-            color: #b33619; 
+            color: #8E6710; /* Mörkare guld för text (Oförändrad för kontrast) */
             line-height: 1.2;
             display: flex; 
             align-items: center;
@@ -132,7 +137,7 @@
 
         #history-line {
             font-size: 4cqw; 
-            color: #b33619; 
+            color: #8E6710; /* Mörkare guld */
             width: 100%;
             text-align: right;
             white-space: nowrap;
@@ -140,7 +145,7 @@
             text-overflow: ellipsis;
             line-height: 1.2;
             flex-shrink: 0;
-            border-bottom: 1px solid rgba(179, 54, 25, 0.4);
+            border-bottom: 1px solid rgba(142, 103, 16, 0.4);
             padding-right: 5%; 
             padding-bottom: 1.5%; 
             margin-bottom: 2%;
@@ -166,30 +171,32 @@
 
         #result-content {
             font-size: 5.0cqw; 
-            color: #ff4d22; 
+            color: #ECB328; /* NY LJUSARE HÖSTFÄRG */
             line-height: 1.2; 
             text-align: right;
             white-space: pre-wrap;
             padding-right: 5px;
             margin-top: auto;
             margin-bottom: 0;
+            /* Text shadow för extra "glow" effekt */
+            text-shadow: 0 0 2px rgba(236, 179, 40, 0.3);
         }
         
         .easter-egg {
             font-size: 8cqw !important; 
             text-align: center !important; 
-            color: #ff4d22; 
-            text-shadow: 0 0 5px rgba(255, 77, 34, 0.5);
+            color: #ECB328; 
+            text-shadow: 0 0 8px rgba(236, 179, 40, 0.6);
             margin-top: auto;
             margin-bottom: auto !important; 
         }
 
         #result-area::-webkit-scrollbar { width: 6px; }
-        #result-area::-webkit-scrollbar-track { background: rgba(179, 54, 25, 0.1); margin: 5px 0; }
-        #result-area::-webkit-scrollbar-thumb { background: #b33619; border-radius: 4px; }
+        #result-area::-webkit-scrollbar-track { background: rgba(142, 103, 16, 0.1); margin: 5px 0; }
+        #result-area::-webkit-scrollbar-thumb { background: #8E6710; border-radius: 4px; }
 
         .screen-bg {
-            fill: #140502; 
+            fill: #160802; /* NY KAFFE-SVART BAKGRUND */
             transition: fill 0.6s ease-in-out; 
         }
         
@@ -198,26 +205,26 @@
         }
 
         .snow-cross {
-            stroke: #ff4d22;
+            stroke: #ECB328; 
             stroke-width: 1.5; 
             stroke-linecap: round;
             pointer-events: none;
         }
         .snow-pixel {
-            fill: #ff4d22;
+            fill: #ECB328; 
             shape-rendering: crispEdges; 
             pointer-events: none;
         }
         
         .pipe {
-            fill: #ff4d22; 
-            shape-rendering: crispEdges;
+            fill: #ECB328; 
+            shape-rendering: crispEdges; 
         }
         
         .banner-char {
             font-family: 'VT323', monospace;
             font-size: 14px;
-            fill: #ff4d22;
+            fill: #ECB328; 
             text-anchor: middle;
         }
         
@@ -225,6 +232,14 @@
             display: none; 
             pointer-events: none;
             image-rendering: pixelated; 
+            /* 
+               FIXAD TOMTE:
+               Sepia = gör honom brun/gammaldags
+               Saturate = ökar färgmättnaden
+               Brightness = gör honom ljusare
+               Hue-rotate = justerar tonen mot guld
+            */
+            filter: sepia(1) saturate(3) brightness(1.3) hue-rotate(10deg);
         }
 
         .hitbox { 
@@ -348,7 +363,7 @@
             <path class="hitbox hitbox-shadow" onclick="input(9)" d="M99.2,212.9h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
             
             <path class="hitbox hitbox-shadow" onclick="input(4)" d="M9.6,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
-            <path class="hitbox hitbox-shadow" onclick="input(5)" d="M54.4,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
+            <path class="hitbox hitbox-shadow" onclick="input(5)" d="M54.4,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
             <path class="hitbox hitbox-shadow" onclick="input(6)" d="M99.2,257.7h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8h-36.9c-1.6,0-2.8-1.3-2.8-2.8h0v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
             
             <path class="hitbox hitbox-shadow" onclick="input(1)" d="M9.6,302.5h36.9c1.6,0,2.8,1.3,2.8,2.8v36.9c0,1.6-1.3,2.8-2.8,2.8H9.6c-1.6,0-2.8-1.3-2.8-2.8v-36.9c0-1.6,1.3-2.8,2.8-2.8h0"/>
@@ -379,8 +394,8 @@
             
             <g id="game-overlay" style="display:none; pointer-events:none;">
                 <rect x="9.6" y="96.4" width="216" height="108.6" fill="rgba(0,0,0,0.7)" />
-                <text x="117" y="145" text-anchor="middle" fill="#ff4d22" font-family="VT323" font-size="24">FLAPPY SANTA</text>
-                <text x="117" y="165" text-anchor="middle" fill="#ff4d22" font-family="VT323" font-size="14">TRYCK [+] FÖR ATT STARTA</text>
+                <text x="117" y="145" text-anchor="middle" fill="#ECB328" font-family="VT323" font-size="24">FLAPPY SANTA</text>
+                <text x="117" y="165" text-anchor="middle" fill="#ECB328" font-family="VT323" font-size="14">TRYCK [+] FÖR ATT STARTA</text>
             </g>
         </g>
 

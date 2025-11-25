@@ -998,26 +998,18 @@ function showHelp() {
     resetIfRhymeDisplayed();
     sfxRound();
     
-    // Ny Info-text layout med mycket luft för scroll
-    let text = "SOM VI VÄNTAT,\nÅRETS JULKLAPP ÄR ÄNTLIGEN HÄR!\n\nGOD JUL OCH GOTT NYTT ÅR\nÖNSKAR ALLA VI PÅ TENGBOM!";
-    
-    // Lägg till många radbrytningar så att användaren måste scrolla ner
-    // Detta simulerar "papper som matas ut"
-    text += "\n\n\n";
-    
-    text += "=== INFO ===\n\n" +
-            "Julrimskalkylatorn är framtagen för att rädda din uppesittarkväll. " +
-            "Låt tekniken göra jobbet medan du tar en glögg.";
-            
-    text += "\n"; // Dubbla radbryt mellan info och guide
-            
-    text += "\n=== GUIDE ===\n\n" +
-            "1. VÄLJ GÅVA\nAnvänd knapparna. Tryck flera gånger för att bläddra.\n\n" +
-            "2. LÄGG TILL\nTryck på + för att kombinera flera gåvor.\n\n" +
-            "3. RIMMA\nTryck ENTER när du är klar.\n\n" +
-            "4. JULSTÄMNING\nDra i spaken för snö & musik.";
+    // Ny Info-text layout
+    const helpText = "GOD JUL OCH GOTT NYTT ÅR\nÖNSKAR ALLA VI PÅ TENGBOM!\n\n" +
+                     "=== INFO ===\n" +
+                     "Julrimskalkylatorn är framtagen för att rädda din uppesittarkväll. " +
+                     "Låt tekniken göra jobbet medan du tar en glögg.\n\n" +
+                     "=== GUIDE ===\n" +
+                     "1. VÄLJ GÅVA\nAnvänd 0-9. Tryck flera gånger för att bläddra.\n\n" +
+                     "2. LÄGG TILL\nTryck på + för att kombinera flera gåvor.\n\n" +
+                     "3. RIMMA\nTryck ENTER när du är klar.\n\n" +
+                     "4. JULSTÄMNING\nVrid på spaken för snö & musik.";
                      
-    updateScreen(text);
+    updateScreen(helpText);
 }
 
 // --- FLAPPY SANTA ENGINE ---
