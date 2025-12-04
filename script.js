@@ -1172,12 +1172,20 @@ function finalizeRhyme() {
 function connectNorthPole() {
     if(!isPowered || isGaming || isGenerating) return;
     resetIfRhymeDisplayed();
+
+// Om vi redan har kontakt, hoppa direkt till slutet
+    if (isConnected) {
+        sfxSuccess();
+        updateScreen("KONTAKT ETABLERAD!\nNORDPOLEN ONLINE.\n\nDELA UT PAKET?\nTRYCK [ENTER]");
+        waitingForGameLaunch = true;
+        return;
+    }
     
     isGenerating = true; 
     sfxRound();
     updateScreen("SÖKER NORDPOLEN...");
     
-    let step = 0;
+    let step = 1;
     const maxSteps = 3; 
 
     function nextWifiStep() {
@@ -1186,7 +1194,7 @@ function connectNorthPole() {
             updateScreen(phrase);
             synth(1200, 'square', 0.05); 
             step++;
-            setTimeout(nextWifiStep, 1200);
+            setTimeout(nextWifiStep, 1000);
         } else {
             sfxSuccess();
             isConnected = true;
@@ -1213,13 +1221,14 @@ function showHelp() {
                      "Låt tekniken göra jobbet medan du lutar dig tillbaka och dricker glögg.\n\n" +
                      "=== GUIDE ===\n\n" +
                      "VÄLJ GÅVA (0-9)\n" +
-                     "Tryck på en siffra för att välja kategori. Tryck upprepade gånger på samma siffra för att bläddra bland specifika gåvor (t.ex. tryck [1] flera gånger för att växla mellan Strumpor, Tofflor, Skor etc.).\n\n" +
+                     "Tryck på en symbolknapp för att välja kategori. Tryck upprepade gånger på samma symbol för att bläddra bland specifika gåvor (t.ex. tryck på symbolen för strumpa flera gånger för att växla mellan Strumpor, Tofflor, Skor etc.).\n\n" +
                      "LÄGG TILL (+)\n" +
                      "Kombinera flera gåvor i samma rim genom att trycka på plus.\n\n" +
                      "RIMMA (ENTER)\n" +
                      "När du är nöjd med dina val, tryck Enter för att generera rimmet.\n\n" +
                      "=== KNAPPAR & REGLAGE ===\n\n" +
                      "[WIFI]: Etablera direktkontakt för specialtjänster.\n" +
+                     "[HÖGTALARE]: Slå av och på ljud.\n" +
                      "[C] RENSA: Tömmer minnet och nollställer.\n" +
                      "[<-] ÅNGRA: Tar bort den senaste valda gåvan.\n" +
                      "[!] SLUMPA: Låt maskinen välja gåvor åt dig.\n" +
