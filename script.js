@@ -3,21 +3,6 @@
  * ---------------------------------------------------
  * Copyright (c) 2025 Tengbom Arkitekter AB
  * Developed by: Andreas Nordström aka HandyMan
- * 
- * 1. CODE LICENSE (MIT):
- * The underlying JavaScript engine, game mechanics, and logic are 
- * released under the MIT License. You are free to use, copy, and modify 
- * the code for any purpose.
- * 
- * 2. ASSETS LICENSE (CC BY 4.0):
- * The graphical user interface (calculator shell), game sprites, and 
- * general visual design are licensed under Creative Commons Attribution 4.0.
- * You are free to reuse and adapt these assets (e.g. recolor).
- * 
- * 3. TRADEMARK EXCLUSION:
- * The "Tengbom" logo, company name, and specific brand-related texts 
- * remain the exclusive property of Tengbom Arkitekter AB and are NOT 
- * included in the open licenses above.
  * ---------------------------------------------------
  */
 
@@ -451,51 +436,27 @@ function startMarqueeSequence() {
     marqueeWrapper.style.transition = ''; 
     marqueeWrapper.classList.remove('marquee-moving');
     marqueeWrapper.style.opacity = '0';
-    // Use transform: translateX(0px) initially to allow proper measurement
-    marqueeWrapper.style.transform = 'translateX(0px)';
-    
-    // Use requestAnimationFrame to ensure DOM is updated before measuring
-    requestAnimationFrame(() => {
-        setTimeout(() => { initMarquee(); }, 50);
-    });
+    setTimeout(() => { initMarquee(); }, 50);
 }
 
 function initMarquee() {
     if (!isPowered) return;
+    const logo1 = marqueeWrapper.children[0];
+    const logo2 = marqueeWrapper.children[2];
+    if(!logo1 || !logo2) return;
+
+    const containerW = topDisplay.getBoundingClientRect().width;
+    // Använd offsetWidth för säkerhets skull om bilden inte laddat
+    const logoW = logo1.offsetWidth || (containerW * 0.4); 
     
-    // Explicitly set transform to 0 before measuring to avoid race conditions
-    marqueeWrapper.style.transform = 'translateX(0px)';
+    const startX = (containerW / 2) - (logoW / 2);
+    
+    // Om logo2 inte är redo, gissa avstånd baserat på struktur
+    const distance = (logo2.offsetLeft > 0) ? (logo2.offsetLeft - logo1.offsetLeft) : (containerW + logoW);
 
-    // Ensure font is loaded to get correct widths
-    document.fonts.ready.then(() => {
-        const logo1 = marqueeWrapper.children[0];
-        const logo2 = marqueeWrapper.children[2];
-        if(!logo1 || !logo2) return;
-
-        // Get dimensions using getBoundingClientRect which accounts for rendering
-        const containerRect = topDisplay.getBoundingClientRect();
-        const logoRect = logo1.getBoundingClientRect();
-        
-        // Calculate centers
-        const containerCenter = containerRect.width / 2;
-        
-        // Current Logo Center relative to the container's left edge
-        // (Logo Left - Container Left) gives x position inside container
-        // + Logo Width / 2 gives the center point
-        const currentLogoCenter = (logoRect.left - containerRect.left) + (logoRect.width / 2);
-        
-        // Calculate offset needed: Destination (Center) - Current Position
-        const startX = containerCenter - currentLogoCenter;
-
-        // Calculate distance for the loop
-        const distance = logo2.getBoundingClientRect().left - logo1.getBoundingClientRect().left;
-
-        // Apply the transform
-        marqueeWrapper.style.transform = `translateX(${startX}px)`;
-        
-        setTimeout(() => { marqueeWrapper.style.opacity = '1'; }, 50);
-        marqueeTimer = setTimeout(() => { runMarqueeCycle(startX, distance); }, 2000);
-    });
+    marqueeWrapper.style.transform = `translateX(${startX}px)`;
+    setTimeout(() => { marqueeWrapper.style.opacity = '1'; }, 50);
+    marqueeTimer = setTimeout(() => { runMarqueeCycle(startX, distance); }, 2000);
 }
 
 function runMarqueeCycle(startX, distance) {
@@ -757,6 +718,8 @@ function togglePower() {
         
         marqueeWrapper.style.opacity = '0'; 
         
+        renderSnow(knobState);
+
         updateScreen("SYSTEMCHECK...");
         bootTimers.push(setTimeout(() => updateScreen("SYSTEMCHECK...<br>LADDAR RIM-MODUL..."), 1000));
         bootTimers.push(setTimeout(() => updateScreen("SYSTEMCHECK...<br>LADDAR RIM-MODUL...<br>MATAR RENARNA..."), 2500));
@@ -1035,7 +998,6 @@ function action(type) {
 
     if(isGaming) {
         if (type === 'CLEAR' || type === 'BACK') {
-            // "Panic button" - avsluta spelet direkt
             exitGame();
             updateScreen("VÄLJ GÅVA...");
             historyLine.textContent = "";
@@ -1201,7 +1163,6 @@ function connectNorthPole() {
     if(!isPowered || isGaming || isGenerating) return;
     resetIfRhymeDisplayed();
 
-// Om vi redan har kontakt, hoppa direkt till slutet
     if (isConnected) {
         sfxSuccess();
         updateScreen("KONTAKT ETABLERAD!\nNORDPOLEN ONLINE.\n\nDELA UT PAKET?\nTRYCK [ENTER]");

@@ -54,11 +54,7 @@
 
         #top-display-container {
             left: 4.1%; top: 1.7%; width: 53.6%; height: 9.3%;
-            overflow: hidden; 
-            display: flex; 
-            align-items: center; 
-            /* Fix 2: Remove padding to allow true flex centering */
-            padding-top: 0; 
+            overflow: hidden; display: flex; align-items: center; padding-top: 3%; 
             background-color: transparent; 
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
             mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
@@ -72,23 +68,17 @@
 
         .marquee-moving { transition-timing-function: linear; transition-property: transform; }
 
-        .yulecalc-logo {
-            font-family: 'VT323', monospace;
-            font-size: 10cqw; /* Correct requested size */
-            color: #ECB328; /* Fix 1: Same color as other text */
-            /* Fix 3: Sharp shadow, no blur */
-            text-shadow: 1px 1px 0px rgba(0,0,0,0.2); 
+        .yulecalc-logo-img {
+            height: 85%; 
+            width: auto;
             margin: 0 4cqw;
-            line-height: 1; /* Fix 4: Tight line-height */
-            font-weight: normal;
             flex-shrink: 0;
-            padding-top: 0.1em; /* Micro-adjustment for baseline */
+            filter: drop-shadow(0 0 1px rgba(236, 179, 40, 0.5));
         }
         
         .marquee-text {
             font-size: 5.5cqw; color: #8E6710; line-height: 1.2;
             display: flex; align-items: center; flex-shrink: 0; margin: 0 5cqw;
-            padding-top: 0.1em; /* Align baseline with logo */
         }
 
         #main-display-container {
@@ -162,9 +152,9 @@
     
     <div id="top-display-container" class="display-overlay">
         <div class="marquee-wrapper" id="marquee">
-            <span class="yulecalc-logo">YULECALC</span>
+            <img class="yulecalc-logo-img" src="assets/yulecalc-logo.png" alt="Yulecalc Logo">
             <span class="marquee-text">JULRIMSKALKYLATORN 1.0 — EN HANDYMAN PRODUKTION — DRIVS AV GLÖGG OCH JULMAGI</span>
-            <span class="yulecalc-logo">YULECALC</span>
+            <img class="yulecalc-logo-img" src="assets/yulecalc-logo.png" alt="Yulecalc Logo">
         </div>
     </div>
 
