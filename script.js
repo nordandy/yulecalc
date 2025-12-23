@@ -1,5 +1,5 @@
 /**
- * CHRISTMAS RHYME CALCULATOR (v3.0)
+ * JULRIMSKALKYLATOR (v3.0)
  * ---------------------------------------------------
  * Copyright (c) 2025 Tengbom Arkitekter AB
  * Developed by: Andreas Nordström aka HandyMan
@@ -23,367 +23,367 @@
 
 // --- CONFIG & DATA ---
 
-// Intros (Randomly selected)
+// Inledningar (Slumpas fram, 1 av 25)
 const INTROS = [
-    "Merry Christmas we wish you with this gift,\nwe hope it gives your spirits a lift.",
-    "Snow is falling on the roof so white,\nhere is a gift to make your Christmas bright.",
-    "Santa has visited and left a treat,\nsomething we hope you'll think is sweet.",
-    "Outside the window snowflakes dance,\nopen this gift, take a chance.",
-    "We have pondered and we have thought,\nuntil this rhyme for you we caught.",
-    "A package filled with warmth and cheer,\nto celebrate the end of the year.",
-    "Christmas is here in every corner,\nthis gift makes the winter a little warmer.",
-    "The time is now, the tree is lit,\nhere is a gift intended to fit.",
-    "Silent night, holy night,\nthis package brings a pure delight.",
-    "Here comes a gift with a wish for peace,\nmay your holiday joy never cease.",
-    "Open the package and take a look,\nwe didn't buy this by the book.",
-    "From all of us to you today,\na special thing coming your way.",
-    "Christmas is here with light and song,\nopen it now, don't wait too long.",
-    "Hard or soft, big or small?\nSoon you will uncover it all.",
-    "Rhyming is hard but giving is fun,\nthat's why you're the lucky one.",
-    "Santa whispers in the winter night,\nmaybe this gift is shining bright.",
-    "The tree is glimmering, candles aglow,\nwhat is inside? You soon shall know.",
-    "A little box with paper and string,\nhope you enjoy the joy we bring.",
-    "Something you wished for, or a surprise?\nWe hope it lights up your eyes.",
-    "Waiting for Santa and holiday food,\nwe hope this puts you in a good mood.",
-    "Stars are twinkling in the sky so clear,\nhere is the best gift intended for here.",
-    "Lean back and enjoy a moment of rest,\nthis gift comes from the very best.",
-    "No one knows what the paper hides,\nuntil you look at what's insides.",
-    "Christmas spirit in house and hall,\nhere is something for you to call.",
-    "Now it is time to present this prize,\nto someone special in our eyes."
+    "God Jul önskar vi med detta paket,\nvad som är i är en hemlighet.",
+    "Snön ligger vit på taken,\nhär kommer klappen för smaken.",
+    "Tomten har varit här och vänt,\nhär får du något vi hoppas känns känt.",
+    "Utanför fönstret dansar en flinga,\nnu ska du få höra julklockor klinga.",
+    "Vi har tänkt och vi har klurat,\ntills vi detta rim har lurat.",
+    "En klapp fylld av värme och hopp,\nfrån botten och ända upp till topp.",
+    "Nu är det jul i varje vrå,\nhär är en klapp du ska få.",
+    "Det lackar mot jul, tiden är inne,\nhär får du något för ditt sinne.",
+    "Midnatt råder, tyst det är i husen,\nmen detta paket tänder juleljusen.",
+    "Här kommer en gåva med önskan om frid,\noch en riktigt härlig juletid.",
+    "Öppna paketet och se vad du fått,\nvi hoppas att innehållet smakar gott.",
+    "Från oss alla till dig,\nen alldeles särskild liten grej.",
+    "Julen är här med ljus och med sång,\nöppna nu klappen, vänta inte en gång.",
+    "Kanske hårt, kanske mjukt, vem vet?\nSnart får du veta din hemlighet.",
+    "Rimma är svårt men ge bort är kul,\ndärför får du denna till jul.",
+    "Tomten viskar i vinternatten,\nkanske får du den största skatten.",
+    "Granen glimmar och ljusen är tända,\nnu ska vi se vad som här kan hända.",
+    "En liten låda med papper och snöre,\nhoppas du gillar vad vi gör för 'e.",
+    "Något du önskat, eller en chansning?\nHär kommer en riktig glädjesatsning.",
+    "I väntan på tomten och julmatens fröjd,\nhoppas vi göra dig riktigt nöjd.",
+    "Stjärnorna gnistrar på himlen så klar,\nhär är den bästa klappen vi har.",
+    "Luta dig bakåt och njut en stund,\nav gåvan som kommer från hjärtats grund.",
+    "Ingen vet vad papperet döljer,\nförrän du öppnar och ser vad som följer.",
+    "Julstämning råder i stuga och slott,\nhär får du något vi hoppas känns flott.",
+    "Nu är det dags att paketet förära,\ntill er som vi håller så oerhört kära."
 ];
 
-// Outro (Always the same)
-const ENDING = "Merry Christmas & Happy New Year!";
+// Avslutning (Alltid samma)
+const ENDING = "God Jul & Gott Nytt År!";
 
-// Loading phrases (Rhymes/Tech jargon)
+// Fraser för laddningssekvensen (Rim)
 const LOADING_PHRASES = [
-    "SEARCHING RHYMES...", "BRAINSTORMING...", "CONSULTING SANTA...",
-    "CALIBRATING SPIRIT...", "LEXICAL ANALYSIS...",
-    "SCANNING DICTIONARY...", "LOADING EGGNOG...", "COUNTING SYLLABLES...",
-    "COOKING UP WORDS...", "CHECKING NAUGHTY LIST...",
-    "RHYME ENGINE 1.0...", "FETCHING_JOY.EXE...",
-    "CONCRETIZING...", "POETIC CALIBRATION...", "RHYMING WITH SNOW...",
-    "LOCATING NOUNS...", "MAXIMIZING COZY...", "ENHANCING MOOD...",
-    "SCANNING NORTH POLE...", "LOADING ALGORITHM..."
+    "SÖKER NÖDRIM...", "SPÅNAR FEBRILT...", "KONSULTERAR TOMTEN...",
+    "KALIBRERAR JULSTÄMNING...", "LEXIKAL ANALYS PÅGÅR...",
+    "SKANNAR RIMLEXIKON...", "LADDAR GLÖGG...", "BERÄKNAR STAVELSER...",
+    "KOKAR IHOP NÅGOT...", "ANALYSERAR SNÄLLHET...",
+    "RIMMOTOR 1.0 STARTAR...", "HÄMTARJULKÄNSLA.EXE...",
+    "KONKRETISERAR...", "POETISK KALIBRERING...", "RIMMAR PÅ GRÖT...",
+    "LETAR EFTER RIMORD...", "MAXIMERARJULMYS...", "FÖRHÖJER STÄMNINGEN...",
+    "GENOMSÖKER NORDPOLEN...", "LADDAR RIM-ALGORITM..."
 ];
 
-// WIFI phrases (Fixed sequence)
+// Fraser för WIFI-uppkoppling (Fast sekvens)
 const WIFI_SEQUENCE = [
-    "SEARCHING NORTH POLE...", 
-    "ENCRYPTING WISH LIST...", 
-    "LOADING SLEIGH..."
+    "SÖKER NORDPOLEN...", 
+    "KRYPTERAR ÖNSKELISTA...", 
+    "LADDAR SLÄDEN..."
 ];
 
-// Database with products and rhymes per category
+// Databas med produkter och 25 generella rim per kategori
 const itemDB = {
-    // 1: Feet & Soft packages
+    // 1: Fötter & Mjuka paket
     1: { 
-        names: ["SOCKS", "SLIPPERS", "SHOES", "SANDALS", "BOOTS"], 
+        names: ["STRUMPOR", "SOCKOR", "TOFFLOR", "SKOR", "SANDALER"], 
         couplets: [
-            "When floors are cold and drafts are near,\nthis is the best thing to wear this year.",
-            "For toes that freeze and turn quite blue,\nhere is something warm for you.",
-            "Walk through life with comfort my friend,\non these soles you can depend.",
-            "No more cold feet in our house,\nquiet steps, just like a mouse.",
-            "These shall sit upon your feet,\nto make your outfit look complete.",
-            "Soft packages are the best to get,\nespecially for your feet, you bet.",
-            "Jump and dance around the tree,\nin the comfiest footwear there can be.",
-            "Freezing toes are never fun,\nso put these on and go for a run.",
-            "Step softly and walk with style,\nthese will last you for a while.",
-            "A classic gift in Santa's sack,\nto keep the winter chill firmly back.",
-            "For everyday use or party time,\nthese on your feet are simply prime.",
-            "Put your foot down and feel secure,\nthese are good for posture, for sure.",
-            "When winter bites your little toes,\nwarm them up in one of those.",
-            "Walk on clouds or walk on ground,\nthe best footwear that can be found.",
-            "Put them on and feel the heat,\na warming hug for your two feet.",
-            "Knitted and warm in wool or yarn,\nkeeps you cozy in house or barn.",
-            "Out for a walk in woods and land,\nthese will help you firmly stand.",
-            "No more slipping and sliding around,\nfeet stay firmly on the ground.",
-            "An ergonomic choice for your ease,\npackaged with love, aiming to please.",
-            "When shoes come off in the hall,\nthese protect you from the cold floor and all.",
-            "Elegant below is a detail key,\nthese deserve a trophy, you see.",
-            "They warm, they protect, they fit so tight,\nexactly what makes your feet feel right.",
-            "From heel to toe a warming embrace,\nputting a smile upon your face.",
-            "A basic item, but oh so vital,\nworthy of a noble title.",
-            "Throw away the old with holes in the toe,\nhere are new ones, ready to go."
+            "När golven är kalla och vinden drar,\när detta det skönaste som finns kvar.",
+            "För tår som lätt blir frusna och blå,\nhär är något varmt att sätta på.",
+            "Vandra tryggt genom livet min vän,\nmed dessa på fötterna känns det bra sen.",
+            "Inga fler kalla fötter i vårt hus,\nbara värme och hemtrevligt bus.",
+            "Dessa ska sitta på din fot,\nmot kylan är de ett väldigt bra bot.",
+            "Mjuka paket är de bästa man kan få,\nsärskilt när de ska sitta på tå.",
+            "Hoppa och dansa kring granen så grann,\ni de skönaste skodon vi fann.",
+            "Att frysa om fötterna är inget kul,\ndärför får du dessa till jul.",
+            "Trampa mjukt och gå med stil,\ndessa håller mil efter mil.",
+            "En klassiker i julens säck,\nhåller kylan helt väck.",
+            "Både till vardags och till fest,\nsitter dessa på foten bäst.",
+            "Sätt ner foten och känn dig trygg,\ndessa är bra för både hållning och rygg.",
+            "När vintern biter i tårna dina,\nvärmer du dem i dessa fina.",
+            "Gå på moln eller gå på mark,\nmed dessa känner du dig stark.",
+            "Sätt dem på fötterna och känn hur de mår,\nde skönaste paren du får i år.",
+            "Stickat och varmt i ull eller garn,\npassar lika bra till vuxna som barn.",
+            "Ut och gå i skog och mark,\ni dessa känner du dig stark.",
+            "Nu slipper du halka och slira runt,\natt använda dessa är ganska sunt.",
+            "Ett fotriktigt val för din bekvämlighet,\npaketerat med kärlek och hemlighet.",
+            "När du tar av dig skorna i hallen,\nskyddar dessa mot en kall en.",
+            "Elegant nertill är en viktig detalj,\ndessa förtjänar en egen medalj.",
+            "De värmer, de skyddar, de sitter så bra,\nexakt vad dina fötter vill ha.",
+            "Från hälen till tån en värmande kram,\ngör att du slipper känna dig stram.",
+            "En basvara kanske, men ack så viktig,\ndenna julklapp är ändå riktig.",
+            "Släng dina gamla med hål i tå,\nhär är nya som du ska få."
         ] 
     },
-    // 2: Underwear & Sleepwear
+    // 2: Underkläder & Sovplagg
     2: { 
-        names: ["BOXERS", "PANTIES", "PAJAMAS", "NIGHTCAP", "THERMALS"], 
+        names: ["KALSONGER", "TROSOR", "PYJAMAS", "NATTMÖSSA", "NÄSVÄRMARE"], 
         couplets: [
-            "Closest to the body should be soft,\nsomething to wear in the loft.",
-            "When you sleep and dream so sweet,\nthis makes your bedtime feel complete.",
-            "Something for night or the day underneath,\nsoft as a whisper, light as a breath.",
-            "Something that sits incredibly near,\nto you my darling, mostly dear.",
-            "A soft start to every day,\nin a very comfortable way.",
-            "For sweet dreams and a quiet night,\nsoft and cozy, fits just right.",
-            "This is a private little thing,\njoy and comfort it will bring.",
-            "When the Sandman throws his sand,\nthis feels lovely in dreamland.",
-            "Comfort is the word of the day,\nsoft against skin in every way.",
-            "Wrap yourself in softness and peace,\nmay your relaxation never cease.",
-            "Nothing that itches, nothing that binds,\nthe softest fabric that one finds.",
-            "For lazy days and mornings late,\nthis garment is simply great.",
-            "Next to the skin the feeling is key,\nthis gift is quality, you will see.",
-            "Sleep so well in this attire,\nby the radiator or the fire.",
-            "A textile so light, a textile so small,\nwe hope the size fits you after all.",
-            "First thing on, last thing off,\nsoft material, nothing rough.",
-            "In bed, on the couch, or under your dress,\nthis removes all daily stress.",
-            "For those who like to lounge around,\nthe perfect gift that we have found.",
-            "Cotton or silk, lace or not,\na personal gift that you have got.",
-            "When the moon shines and stars are bright,\nnothing shall disturb your sleep tonight.",
-            "Dressed for success where no one can see,\nit makes you smile secretly.",
-            "A hug from fabric that breathes and warms,\nkeeping you safe from winter storms.",
-            "Replace the old, the worn and gray,\nwith this new one for Christmas day.",
-            "The comfiest garment in the house,\nquiet and soft as a little mouse.",
-            "Soft packages are the Christmas song,\nwith this on you can't go wrong."
+            "Det närmaste kroppen ska vara mjukt,\nallt annat vore ju tokigt och sjukt.",
+            "När du ska sova och drömma sött,\npassar detta när du är trött.",
+            "Något för natten eller dagen under,\npassar för alla dina stunder.",
+            "Här får du något som sitter nära,\ntill dig min allra käraste kära.",
+            "En mjuk start på varje dag,\nför ditt eget välbehag.",
+            "För skön dröm och lugn natt,\nmjuka och sköna, nästan som en katt.",
+            "Detta är en privat liten sak,\nsom sitter bra både fram och bak.",
+            "När John Blund strör sitt grus,\när detta skönt i ditt hus.",
+            "Komfort är ordet för dagen,\nhär får du något mjukt mot magen.",
+            "Svep in dig i mjukhet och ro,\ndet är skönare än du kan tro.",
+            "Inget som kliar och inget som stramar,\nkänns som tusen mjuka kramar.",
+            "För lata dagar och sena morgnar,\nnär du inte vill ha något som förborgar.",
+            "Närmast huden är känslan viktig,\ndenna gåva är faktiskt riktig.",
+            "Sov så gott i detta plagg,\nutan bekymmer och utan agg.",
+            "En liten textil, så mjuk och så lätt,\nvi hoppas storleken blev rätt.",
+            "Det första du tar på, det sista du tar av,\nen gåva med mycket höga krav.",
+            "I sängen, i soffan eller under din dress,\ntar denna bort all vardagsstress.",
+            "För dig som gillar att mysa omkring,\när detta en väldigt passande ting.",
+            "Bomull eller silke, spets eller ej,\nhär är en riktigt personlig grej.",
+            "När månen lyser och stjärnorna tindra,\nska inget din skönhetssömn få hindra.",
+            "Klädd för succé, fast ingen det ser,\ndet gör att du i hemlighet ler.",
+            "En kram från tyg som andas och värmer,\nkänn hur julkänslan sig närmer.",
+            "Byt ut det gamla, slitna och grå,\nmot detta nya du nu ska få.",
+            "Skönaste plagget i hela huset,\ninnan du tänder morgonljuset.",
+            "Mjuka paket är julens melodi,\ndetta är något du trivs bäst i."
         ] 
     },
-    // 3: Winter Clothes
+    // 3: Vinterkläder
     3: { 
-        names: ["SWEATER", "BEANIE", "SCARF", "MITTENS", "BASE LAYER"], 
+        names: ["TRÖJA", "MÖSSA", "HALSDUK", "VANTAR", "LÅNGKALSONGER"], 
         couplets: [
-            "Dress for the weather, so they say,\nbut look good doing it every day.",
-            "When frost nips at your nose and cheek,\nthis will keep you warm all week.",
-            "A warming hug in textile form,\nto keep you safe within the storm.",
-            "For walks in snow and ice so cold,\nthis keeps you warm, truth be told.",
-            "Now you never have to freeze,\nwalk outside with total ease.",
-            "Soft and warm against the chill,\nkeeps you cozy, standing still.",
-            "Winter cold stands no chance,\nagainst this soft elegance.",
-            "Bundle up and head outside,\nnowhere for the cold to hide.",
-            "Style and warmth combined in one,\nmakes the winter much more fun.",
-            "Keep the heat when storms blow by,\na gift on which you can rely.",
-            "Knitted comfort for body and head,\nbetter than staying in your bed.",
-            "When northern winds howl round the door,\nyou'll be warm forevermore.",
-            "Match with jacket, match with shoe,\nwarmth and peace it brings to you.",
-            "No one wants to shiver and shake,\nwarmth all the way for goodness sake.",
-            "Wear it with pride in winter time,\nit fits perfectly with this rhyme.",
-            "Around your neck or on your top,\nthe freezing cold will surely stop.",
-            "For snowball fights and sledding hills,\nprotects against the winter chills.",
-            "Warm as a fire, soft as a cat,\nperfect for winter, imagine that.",
-            "Fashion and function in a single piece,\nmay your shivering finally cease.",
-            "When the thermometer shows blue,\nthis is the best gift for you.",
-            "Layer on layer is good advice,\nthis gift makes the weather nice.",
-            "Protect yourself from weather's power,\nin every cold and snowy hour.",
-            "A softie that warms, we promise you this,\na thoughtful gift you wouldn't want to miss.",
-            "Stylish cut and fabric fine,\nan excellent choice for wintertime.",
-            "Now you can meet winter's embrace,\nwithout the cold upon your face."
+            "Kläder efter väder säger man ju,\nmen snygg ska man vara, även nu.",
+            "När frosten nyper i kind och näsa,\nkan du i denna värme läsa.",
+            "En värmande kram i textila mått,\ndet är vad du just har fått.",
+            "För promenader i snö och is,\nhåller denna dig varm på alla vis.",
+            "Nu behöver du inte frysa mer,\nförrän vårsolen åter ler.",
+            "Mjukt och varmt mot kylan där ute,\nnu blir du skyddad som en gute.",
+            "Vinterkylan har ingen chans,\nmot denna mjuka elegans.",
+            "Bylta på dig och ge dig ut,\nnu är frysandet äntligen slut.",
+            "Stil och värme i kombination,\nen riktigt härlig jultradition.",
+            "Håll värmen när stormen yr,\nen klapp som är värd sitt bestyr.",
+            "Stickat och skönt mot kropp och knopp,\nhåller humöret på topp.",
+            "När nordanvinden viner runt knuten,\när du i denna väl omsluten.",
+            "Matcha med jacka och matcha med sko,\ni denna får du värme och ro.",
+            "Ingen vill frysa och huttra och skaka,\nvärmen når ända ner till din haka.",
+            "Bär den med stolthet i vintertid,\nså sprider du både värme och frid.",
+            "Runt din hals eller på din knopp,\nhåller denna värmen opp.",
+            "För snöbollskrig och pulkabacke,\nskyddar den både bröst och nacke.",
+            "Varm som en brasa, mjuk som en katt,\npassar perfekt en vinternatt.",
+            "Mode och funktion i ett enda stycke,\nhoppas du fattar för denna tycke.",
+            "När termometern visar blått,\när detta det bästa du har fått.",
+            "Lager på lager är bra, har vi hört,\nmed denna gåva blir inget förstört.",
+            "Skydda dig mot vädrets makter,\ni alla dina vintertrakter.",
+            "En mjukis som värmer, det lovar vi dig,\nen riktigt omtänksam liten grej.",
+            "Snyggt snitt och härligt material,\nett alldeles utmärkt vinterval.",
+            "Nu kan du möta vinterns famn,\nutan att frysa i din hamn."
         ] 
     },
-    // 4: Hygiene & Scent
+    // 4: Hygien & Doft
     4: { 
-        names: ["PERFUME", "SOAP", "LOTION", "SHAMPOO", "SCRUB"], 
+        names: ["PARFYM", "TVÅL", "LOTION", "SCHAMPO", "SCRUB"], 
         couplets: [
-            "A little luxury in daily stress,\na scent full of finesse.",
-            "For a moment in the bathroom space,\nto relax and slow down the pace.",
-            "Smell so good and feel so fresh,\ncleaning up the daily mesh.",
-            "A scent of class and purity,\na little secret just for thee.",
-            "Spoil yourself a little while,\nwith scents that make you smile.",
-            "For body and soul and feeling well,\nready for a new day to tell.",
-            "Clean and fine you want to be,\nthis fixes that effectively.",
-            "Gold-plate your morning hour,\nwith a scent of fresh flower.",
-            "Spa feeling right at home for you,\na lovely thing for you to do.",
-            "Something that perks you up a lot,\nthat is exactly what you got.",
-            "Bubbles and scent in a holy mix,\ngives your mood a rapid fix.",
-            "Grease and wash and smell so great,\nluxury at a rapid rate.",
-            "A bottle of magic for your skin,\nmakes you feel brand new within.",
-            "Take care of yourself, you deserve it so,\non your daily way to go.",
-            "Fresh as a rose or cool as breeze,\napply it anywhere you please.",
-            "A fragrance lingering in the air,\nthe finest gift beyond compare.",
-            "Relaxation when the week is done,\nbreathe in, breathe out, have some fun.",
-            "Scrub away the old year's dust,\na shiny new you is a must.",
-            "Softening, soothing, lovely and fat,\na jar of vitality, imagine that.",
-            "Spray a mist and feel so fine,\nbetter than medicine or wine.",
-            "Here is something for shower and bath,\nto guide you on a cleaner path.",
-            "Aromas that calm and give you peace,\nmaking the holiday stress cease.",
-            "Smooth as velvet skin will be,\nwith this cream of magic glee.",
-            "A scent symphony for your mind,\nleaving the winter gray behind.",
-            "Clean it shall be, from top to toe,\nthis is the gift to make you glow."
+            "Lite lyx i vardagens stress,\nhär får du doft med finess.",
+            "För en stund i badrummets vrå,\ndär du kan koppla av och må.",
+            "Dofta gott och känn dig fräsch,\nbort med gammalt groll och äsch.",
+            "En doft av flärd och renlighet,\när denna lilla hemlighet.",
+            "Skäm bort dig själv en liten stund,\nmed dofter från en vacker lund.",
+            "För kropp och knopp och välbehag,\ngör dig redo för en ny dag.",
+            "Ren och fin ska man vara,\ndet fixar denna vara.",
+            "Sätt guldkant på din morgonstund,\nmed doft som gör dig sund.",
+            "Spa-känsla hemma hos dig,\nen riktigt härlig grej.",
+            "Något som piggar upp och gör gott,\ndet är vad du just har fått.",
+            "Bubblor och doft i en salig blandning,\nger dig en mjuk och skön landning.",
+            "Smörj och tvätta och lukta så gott,\ndetta är lyx i stort och smått.",
+            "En flaska med magi för din hy,\ngör att du känner dig som ny.",
+            "Ta hand om dig själv, det är du värd,\npå din dagliga levnadsfärd.",
+            "Frisk som en ros eller sval som en vind,\npassar fint på din mjuka kind.",
+            "En doft som dröjer sig kvar,\ndet finaste som tomten har.",
+            "För avkoppling efter veckans slut,\nandas in och andas ut.",
+            "Skrubba bort det gamla året,\noch sätt lite glans i håret.",
+            "Mjukgörande, lenande, härlig och fet,\nen burk med ren vitalitet.",
+            "Spraya en dusch och känn dig fin,\nbättre än dyrbar medicin.",
+            "Här får du något för dusch och bad,\nsom gör dig både ren och glad.",
+            "Aromer som lugnar och ger dig frid,\nperfekt i denna stressiga tid.",
+            "Len som sammet ska huden bli,\nmed denna kräm med magi i.",
+            "En doftsymfoni för ditt sinne,\nväcker ett vackert sommarminne.",
+            "Rent ska det vara, från topp till tå,\ndetta är klappen du väntat på."
         ] 
     },
-    // 5: Decor
+    // 5: Inredning
     5: { 
-        names: ["CANDLE", "VASE", "DECOR", "PLANT", "ART"], 
+        names: ["LJUS", "VAS", "INREDNING", "KRUKVÄXT", "KONST"], 
         couplets: [
-            "Something beautiful for the eye,\nto make your home reach for the sky.",
-            "To create a mood of peace and light,\nin this dark and winter night.",
-            "A detail lifting up your room,\nchasing away the winter gloom.",
-            "Home is best, so people say,\nand even nicer starting today.",
-            "Let the home shine and be grand,\nwith this beauty in your hand.",
-            "Something to stand, hang or ignite,\nto make the cozy feeling right.",
-            "A joy for the eye in your nook,\nwe hope you like the way it looks.",
-            "To make your home feel complete,\nwe chose this, neat and sweet.",
-            "Design and form in union sweet,\ngives home comfort a new beat.",
-            "Create an atmosphere of rest,\nwhere you like to live the best.",
-            "Put it in the window or on the table,\na decor piece solid and stable.",
-            "Light up the dark with a flame so clear,\na mood that is clean and dear.",
-            "Soft for the couch or nice for the shelf,\na little treat for your home and yourself.",
-            "A form that appeals to eye and mind,\nthe finest decor one can find.",
-            "Make it homey, warm and snug,\nlike a visual little hug.",
-            "A splash of color or stylish white,\nmaking your home shine so bright.",
-            "Something to fill with flowers and green,\nthe nicest thing you've ever seen.",
-            "Artistically made with thought and hand,\nperhaps from a distant land?",
-            "Renew, change and spruce it up,\ndecor joy in a full cup.",
-            "Soft to lean your head against,\nor beautiful by the bed, commenced.",
-            "Living candles burn in the night,\nmaking everything feel alright.",
-            "An ornament sparking questions anew,\nor glowing like little flames so true.",
-            "Give your home a personal touch,\nwithout costing way too much.",
-            "Style and taste in a package neat,\nwhat it is? A secret sweet!",
-            "Let your home shine and be bright,\nwith this lovely decor light."
+            "Något vackert att vila ögonen på,\nsom får hemmet att stråla och må.",
+            "För att skapa stämning och frid,\ni denna mörka vintertid.",
+            "En detalj som lyfter ditt rum,\noch gör stilen mindre skum.",
+            "Hemma är bäst, så sägs det ju,\noch ännu finare blir det nu.",
+            "Låt hemmet skina och vara grant,\nmed denna vackra variant.",
+            "Något att ställa, hänga eller tända,\nsom får trivseln att återvända.",
+            "En fröjd för ögat i hemmets vrå,\nsom vi hoppas du gillar att titta på.",
+            "För att göra ditt hem komplett,\nhar vi valt detta, rätt och slätt.",
+            "Design och form i skön förening,\nger hemmamyset ny mening.",
+            "Skapa en atmosfär av ro,\ndär du allra helst vill bo.",
+            "Ställ den i fönstret eller på bordet,\nhär har du sista inredningsordet.",
+            "Lys upp mörkret med lågans sken,\nen stämning som är ren och pen.",
+            "Mjukt för soffan eller snyggt för hyllan,\nsätter guldkant på den gråa myllan.",
+            "En form som tilltalar ögat och sinnet,\nfastnar garanterat på minnet.",
+            "Gör det hemtrevligt, varmt och ombonat,\nmed denna sak som vi har donat.",
+            "En färgklick eller stilrent vitt,\nnu blir ditt hem ännu mer ditt.",
+            "Något att fylla med blommor och blad,\ngör vilken inredare som helst glad.",
+            "Konstnärligt skapat med tanke och hand,\nkanske från ett fjärran land?",
+            "Förnya, förändra och piffa opp,\ninredningsglädje i full galopp.",
+            "Mjukt att luta huvudet mot,\neller vackert vid sängens fot.",
+            "Levande ljus i mörkret brinner,\ndå stressen sakta försvinner.",
+            "En prydnadssak som väcker frågor,\neller lyser som små lågor.",
+            "Ge ditt hem en personlig touch,\nutan att det kostar för much.",
+            "Stil och smak i ett fint paket,\nvad det är? En hemlighet!",
+            "Låt ditt hem få stråla ikapp,\nmed denna fina inredningsklapp."
         ] 
     },
-    // 6: Kitchen & Cooking
+    // 6: Kök & Matlagning
     6: { 
-        names: ["MUG", "BOWL", "GADGET", "PLATES", "CUTLERY"], 
+        names: ["MUGG", "SKÅL", "KÖKSPRYL", "SERVIS", "BESTICK"], 
         couplets: [
-            "To the kitchen where magic occurs,\nhere is gear that purrs and stirs.",
-            "For moments at the table and stove,\na treasure from the kitchen trove.",
-            "When food is cooked or eaten with glee,\nthis gift will be key, you see.",
-            "A helping hand in culinary quests,\nor for fika with your guests.",
-            "For tasty flavors and pleasant times,\ncelebrated with these rhymes.",
-            "Something practical for your cuisine,\nto keep your cooking area clean.",
-            "Set the table and invite a guest,\nyou will surely be the best.",
-            "For food and drink and moments good,\na marvel made of steel or wood.",
-            "Make everyday life more elegant,\nwith this kitchen element.",
-            "Serve, cook or simply drink,\nwith style and flair, don't you think?",
-            "Bake a cake or fry a steak,\nuse this tool for goodness sake.",
-            "For the coffee sip or tea time break,\na gift given for your sake.",
-            "Sharp it should be, or maybe round,\neating well makes you sound.",
-            "Mix and stir and whisk and shake,\nsoon we'll taste the things you make.",
-            "Nice on the table when friends drop by,\nfor porridge or for pizza pie.",
-            "A gadget easing your daily toil,\nso your temper doesn't boil.",
-            "Pour the drink into your cup,\nand feel the warmth filling up.",
-            "Food art needs the proper tool,\nhere is something really cool.",
-            "Chop, slice, dice and shred,\nuntil everyone is fed.",
-            "A bowl for candy or for soup,\nthe favorite of the group.",
-            "The kitchen hero in shiny steel,\nmakes every meal a better deal.",
-            "Make breakfast a feast to see,\nwith this gadget full of glee.",
-            "For the master chef in the home,\nno need to let your cooking roam.",
-            "Serve with love and serve with style,\nthis will bring a happy smile.",
-            "Order among pots and plates,\nnow cooking fun surely awaits."
+            "Till köket där magin sker,\nhär får du utrustning och lite mer.",
+            "För stunder vid bordet och spisen,\nhär har du den rätta expertisen.",
+            "När maten ska lagas eller ätas,\nska denna gåva mätas.",
+            "En hjälpande hand i kulinariska bestyr,\neller för en fika när dagen gryr.",
+            "För goda smaker och trevliga stunder,\nkanske du skapar kulinariska under?",
+            "Något praktiskt för ditt kök,\nså du slipper onödigt stök.",
+            "Duka fram och bjud till fest,\ndå blir du allas favoritgäst.",
+            "För mat och dryck och goda stunder,\nhär får du ett litet under.",
+            "Gör vardagen lite mer elegant,\nmed denna köksvariant.",
+            "Servera, laga eller drick,\ngör det med både stil och skick.",
+            "Baka en kaka eller stek en bit,\nanvänd denna med flit.",
+            "För kaffetåren eller teets stund,\nen gåva från hjärtats grund.",
+            "Vasst ska det vara, eller kanske runt,\natt äta bra är ju ganska sunt.",
+            "Blanda och rör och vispa och skaka,\nsnart får vi smaka din goda kaka.",
+            "Snyggt på bordet när gäster kommer,\noavsett om det serveras gröt eller hummer.",
+            "En pryl som underlättar ditt slit,\nger matlagningen extra flit.",
+            "Häll upp drycken i din kopp,\noch känn hur värmen fyller din kropp.",
+            "Matkonst kräver rätt verktygslåda,\nhär är något för er båda.",
+            "Hacka, skiva, tärna och strimla,\nså att smakerna börjar vimla.",
+            "En skål för godis eller för soppa,\ni denna kan du allting doppa.",
+            "Kökets hjälte i blank metall,\nstår pall för både varm och kall.",
+            "Gör frukosten till en festmåltid,\nmed denna grej får du extra frid.",
+            "För mästerkocken i hemmets vrå,\nhär är en klapp du väntat på.",
+            "Servera med kärlek och servera med stil,\ndetta lockar fram ett smil.",
+            "Ordning och reda bland grytor och fat,\nnu blir det roligare att laga mat."
         ] 
     },
-    // 7: Reading & Relaxation
+    // 7: Läsning & Avkoppling
     7: { 
-        names: ["BOOK", "PAPER", "NOVEL", "MAGAZINE", "POETRY"], 
+        names: ["BOK", "TIDNING", "ROMAN", "MAGASIN", "DIKTSAMLING"], 
         couplets: [
-            "Here is a chance to dream away,\nto another world, another day.",
-            "Now you can relax and just be,\nletting thoughts run wild and free.",
-            "Sink into the chair and enjoy,\nthis literary little toy.",
-            "Words on paper, thoughts and dreams,\nflowing in unending streams.",
-            "Knowledge, thrills or romance sweet,\na whole world at your feet.",
-            "Turn off the screen and open your view,\nto a world entirely new.",
-            "A journey without moving a feet,\nthe very best kind of retreat.",
-            "Let your fantasy take wing,\nhear the stories softly sing.",
-            "Browse, read and be fascinated,\nlet your mind be stimulated.",
-            "Silence, calm and a story good,\nunderstood as best one could.",
-            "Suspense that makes you shiver and shake,\nperfect for a cozy break.",
-            "Facts and knowledge, wisdom and wit,\nall gathered in a single kit.",
-            "An adventure between pages soft,\nlifting your spirits up aloft.",
-            "Forget the daily grind a while,\nand enjoy a literary smile.",
-            "Page up and page down to read,\nmore is what you'll surely need.",
-            "A magazine for what you like best,\nputting your boredom to the test.",
-            "Read about the world outside,\nthings you didn't know, far and wide.",
-            "Mystery, drama or poetry,\nhere is a world for you to see.",
-            "A moment of silence, a cup of tea,\nthe best thing you can get from me.",
-            "Follow the twists, turn the page,\nwisdom for every single age.",
-            "Words that rhyme or explain a lot,\na lasting gift that you have got.",
-            "For the bookworm wanting to know it all,\nanswering every curious call.",
-            "Travel to places you've never seen,\nin a way that is serene.",
-            "Laughter and tears and thoughts so deep,\na book to read before you sleep.",
-            "Your own time in a hectic world,\na story waiting to be unfurled."
+            "Här får du en chans att drömma dig bort,\ntill en annan värld av en annan sort.",
+            "Nu får du koppla av och bara vara,\noch låta tankarna i texten fara.",
+            "Sjunka ner i fåtöljen och njut,\ntills berättelsen tar slut.",
+            "Ord på papper, tankar och drömmar,\nsom genom ditt medvetande strömmar.",
+            "Kunskap, spänning eller romantik,\nhär finns en hel butik.",
+            "Stäng av skärmen och öppna din vy,\nför en värld som är helt ny.",
+            "En resa utan att flytta din fot,\nbästa sortens bot.",
+            "Låt din fantasi få vingar,\nhör hur berättelsens klockor klingar.",
+            "Bläddra, läs och fascineras,\nlåt ditt sinne inspireras.",
+            "Tystnad, lugn och en god historia,\nger dig en egen gloria.",
+            "Spänning som får dig att rysa,\nperfekt när du inne vill mysa.",
+            "Fakta och vetande, klokskap och vett,\nallt samlat på ett och samma sätt.",
+            "Ett äventyr mellan mjuka blad,\ngör dig både klok och glad.",
+            "Glöm vardagen för en liten stund,\noch ta dig en litterär blund.",
+            "Sida upp och sida ner,\ndu kommer bara vilja ha mer.",
+            "En tidning för ditt intresseområde,\nvi hoppas det faller dig i nåde.",
+            "Läs om världen utanför din dörr,\nsaker du aldrig visste förr.",
+            "Deckare, drama eller poesi,\nhär är världen du kan gå in i.",
+            "En stund av tystnad, en kopp med te,\ndet bästa du kan få, ska du se.",
+            "Häng med i svängarna, vänd på bladet,\nsimma runt i bokstavsbadet.",
+            "Ord som rimmar eller ord som förklarar,\nen gåva som länge varar.",
+            "För bokmalen som vill veta allt,\nserveras orden varmt och kallt.",
+            "Res till platser du aldrig sett,\npå ett väldigt enkelt sätt.",
+            "Skratt och gråt och djupa tankar,\nhär är en bok som förankrar.",
+            "Din egen tid i en hektisk värld,\nfölj med på en läsevärd färd."
         ] 
     },
-    // 8: Technology
+    // 8: Teknik
     8: { 
-        names: ["HEADPHONES", "GADGET", "CHARGER", "PHONE", "CONSOLE"], 
+        names: ["LURAR", "GADGET", "LADDARE", "MOBIL", "SPELKONSOL"], 
         couplets: [
-            "Wonder of tech in your hand,\nconnecting you to distant land.",
-            "A thing that blinks, sounds or recalls,\nthe best thing within these walls.",
-            "For the modern human of today,\nthis is the only proper way.",
-            "Power and data in speedy flight,\nthis is something really bright.",
-            "For fun, utility or game,\nwith this life won't be the same.",
-            "Here is something digital,\nworking quite phenomenal.",
-            "Buttons, screen or cable wire,\nsetting your tech heart on fire.",
-            "Connected, online, always there,\nthe latest tech beyond compare.",
-            "A gadget making life a breeze,\nor just giving you some ease.",
-            "The future is here in a box,\nfilled with quality that rocks.",
-            "Charge it up and turn it on,\nnow boredom is completely gone.",
-            "Sound in ear or image on screen,\nshielding you from the worldly din.",
-            "Press start and see what will unfold,\nmaybe contacts with worlds untold?",
-            "A device that fixes everything,\nmaking you want to dance and sing.",
-            "Wireless or not, doesn't matter a bit,\nwith this gadget you're a hit.",
-            "Battery full and signal clear,\nthe best gadget of the year.",
-            "For gaming, work or just for fun,\na tech gift second to none.",
-            "Stream, surf, scroll and click,\na truly nifty little trick.",
-            "Small chip but function great,\na true innovation on your plate.",
-            "Keep track of time, pulse and stride,\non your daily techy ride.",
-            "Music in quality divine,\nis what you get in this design.",
-            "Connect and sync and link it all,\nthis is really cool and ball.",
-            "Smarter than you maybe think,\nis the tech that makes us link.",
-            "For those who like buttons and light,\nthis makes Christmas Eve feel bright.",
-            "High-tech gift for a high-tech friend,\nuse it for hours on end."
+            "Teknikens under i din hand,\nkopplar upp dig mot fjärran land.",
+            "En pryl som blinkar, låter eller minns,\ndet bästa som finns.",
+            "För den moderna människan av idag,\när detta ett bra drag.",
+            "Ström och data i en väldig fart,\ndetta är riktigt smart.",
+            "För nöje, nytta eller spel,\nmed denna blir inget fel.",
+            "Här får du något digitalt,\nsom funkar fenomenalt.",
+            "Knappar, skärm eller sladd,\nkanske en digital platta för kladd?",
+            "Uppkopplad, påkopplad, alltid med,\nhär är teknikens senaste led.",
+            "En pryl som gör livet lite lättare,\neller kanske bara mättare.",
+            "Framtiden är här i ett paket,\nfyllt med teknisk kvalitet.",
+            "Ladda upp och koppla på,\nnu ska det undan gå.",
+            "Ljud i örat eller bild på skärm,\nskyddar dig från världens larm.",
+            "Tryck på start och se vad som händer,\nkanske kontakt med andra länder?",
+            "En manick som fixar allt,\ndetta är riktigt ballt.",
+            "Utan sladd eller med, spelar ingen roll,\nmed denna pryl har du full kontroll.",
+            "Batteriet fullt och signalen klar,\nden bästa gadgeten som tomten har.",
+            "För gaming, jobb eller bara kul,\nen teknisk klapp till denna jul.",
+            "Streama, surfa, scrolla och klicka,\nfunkar bra för pojk och flicka.",
+            "Litet chip men stor funktion,\nen riktig innovation.",
+            "Håll koll på tiden, pulsen och stegen,\nför att hitta den rätta vägen.",
+            "Musik i ljuvlig kvalitet,\när vad du får i detta paket.",
+            "Koppla ihop och synka allt,\ndetta är riktigt häftigt och ballt.",
+            "Smartare än du kanske tror,\när tekniken som i lådan bor.",
+            "För den som gillar knappar och ljus,\nblir detta julens sus och dus.",
+            "High-tech gåva till en high-tech vän,\nanvänd den om och om igen."
         ] 
     },
-    // 9: Luck, Fun & Games
+    // 9: Tur, Kul & Spel
     9: { 
-        names: ["LOTTERY", "CINEMA", "TICKET", "GIFTCARD", "EVENT"], 
+        names: ["TRISS", "BIO", "LOTT", "PRESENTKORT", "UPPLEVELSE"], 
         couplets: [
-            "Suddenly it happens, who knows when?\nMaybe the win lies in this pen.",
-            "An experience out of the norm,\nto keep your memories warm.",
-            "Excitement, luck or a laugh or two,\nhope a pleasant night awaits you.",
-            "Not a thing collecting dust,\nbut a memory you can trust.",
-            "Something to do, see and recall,\nthe best gift of them all.",
-            "A ticket to something grand,\nwhen you hold this in your hand.",
-            "Lucky in games or lucky in love,\nlife fits you like a glove.",
-            "Experience something new and fun,\na truly exciting run.",
-            "Anticipation is half the fun,\nhope you become the lucky one.",
-            "A gamble or a safe bet,\nmakes time fly, don't forget.",
-            "Cinema, theater or a show,\na gift with the perfect flow.",
-            "Choose yourself what you desire,\nthat will set your heart on fire.",
-            "Do what you want for this sum,\nit will surely be awesome.",
-            "A memory for life, we hope,\nexpanding your daily scope.",
-            "Freedom to choose, freedom to do,\nthis is a gift strictly for you.",
-            "Maybe a trip, dinner or movie night,\nchoose your trio, make it right.",
-            "Excitement rises when you see,\nwhat this experience can be.",
-            "A night on the town or bank account win,\nthat was the thought within.",
-            "Skip choosing color and skip the size,\nfreedom of choice is the prize.",
-            "Luck comes and luck goes away,\nmaybe it stays with you today.",
-            "Book a date and go away,\nexperience something new today.",
-            "A piece of paper with value on,\nwonder where you will have gone.",
-            "For the moment coming and memories staying,\nthe best gift that we are conveying.",
-            "Take a chance, win or lose,\nhope luck is what you choose.",
-            "Dreams can be bought for money sometimes,\nhold tight to this with rhymes."
+            "Plötsligt händer det, vem vet när?\nKanske vinsten ligger just här.",
+            "En upplevelse utöver det vanliga,\nför stunder som är behagliga.",
+            "Spänning, tur eller en stund av skratt,\nhoppas du får en trevlig natt.",
+            "Inte en sak som samlar damm,\nutan ett minne att plocka fram.",
+            "Något att göra, se och minnas,\nbättre gåva kan knappast finnas.",
+            "En biljett till något stort,\nnär du öppnar detta kort.",
+            "Tur i spel eller tur i kärlek,\nlivet är en underbar lek.",
+            "Upplev något nytt och kul,\nen riktigt spännande jul.",
+            "Förväntan är halva nöjet sägs det ju,\nhoppas du blir lycklig nu.",
+            "En chansning eller ett säkert kort,\ngör att tiden går fort.",
+            "Bio, teater eller show,\ngåvan med det rätta flow.",
+            "Välj själv vad du vill ha,\ndå blir det garanterat bra.",
+            "Gör vad du vill för denna slant,\ndet blir säkert intressant.",
+            "Ett minne för livet, hoppas vi,\nmed denna upplevelse du hamnar i.",
+            "Frihet att välja, frihet att göra,\ndetta är en gåva att föra.",
+            "Kanske en resa, middag eller bio,\nvälj själv din bästa trio.",
+            "Spänningen stiger när du får se,\nvad denna upplevelse kan ge.",
+            "En kväll på stan eller vinst på banken,\ndet var i alla fall tanken.",
+            "Slipp välja färg och slipp välja storlek,\nvalfrihet är en rolig lek.",
+            "Lyckan kommer, lyckan går,\nkanske den stannar hos dig i år.",
+            "Boka in ett datum och ge dig av,\nupplev något bortom alla krav.",
+            "En papperslapp med värde på,\nundrar vad du ska hitta på.",
+            "För stunden som kommer och minnen som består,\nbästa klappen du får i år.",
+            "Chansa och vinn, eller försvinn,\nhoppas turen är din.",
+            "Drömmar kan köpas för pengar ibland,\nhåll hårt i denna med din hand."
         ] 
     },
-    // 0: Candy & Edible
+    // 0: Godis & Ätbart
     0: { 
-        names: ["CHOCOLATE", "CANDY", "PRALINES", "DELI", "DRINK"], 
+        names: ["CHOKLAD", "GODIS", "PRALINER", "DELI", "DRICKBART"], 
         couplets: [
-            "Something sweet with your coffee cup,\nwarms you when you drink it up.",
-            "Life should be enjoyed to the max,\nhere is something for your snacks.",
-            "A taste experience for your tongue,\nnow hunger will not be prolongued.",
-            "This is tasty and makes you glad,\nthe best treat you ever had.",
-            "Sugar, spice and everything nice,\nthat is the condensed advice.",
-            "Enjoy every little bite,\nit makes the Christmas feel just right.",
-            "When cravings start to rumble,\nlet this in your mouth crumble.",
-            "A delight for your taste buds dear,\nsweet, salty and crystal clear.",
-            "Pleasure lasts a little while,\ngiving you a happy smile.",
-            "Treat yourself to something yummy,\nwrapped beautifully for your tummy.",
-            "Melts in the mouth, smooth and sweet,\nbetter than Santa's porridge treat.",
-            "A basket of luxury and tasty stuff,\nyou can never get enough.",
-            "Salty or sour, bitter or sweet,\nhere is a unique little treat.",
-            "Share with friends or eat alone,\npleasure in the flavor zone.",
-            "For Friday coziness or Saturday feast,\nthis tastes better than the least.",
-            "A flavor journey round the earth,\ngiving Christmas extra worth.",
-            "Chocolate is love in solid form,\nmaking happiness the norm.",
-            "Crunchy, chewy or soft inside,\nhope you enjoy the flavor ride.",
-            "Drink that warms a frozen frame,\ndrink it all, enjoy the game.",
-            "Delicacies of highest class,\nenjoy them now, don't let them pass.",
-            "Temptations hard to resist,\njust taste it, don't desist.",
-            "Calories don't count in December,\nsomething you must remember.",
-            "A present vanishing in haste,\nhold the box around the waist.",
-            "Old school candy or flavors new,\nhere are tasty things for you.",
-            "Eat, enjoy and be quite glad,\ntake a chocolate, don't be sad."
+            "Något sött till kaffetåren,\nvärmer gott i vinterspåren.",
+            "Livet ska njutas i fulla drag,\nhär får du något för ditt välbehag.",
+            "En smakupplevelse för din gom,\nnu blir magen inte tom.",
+            "Detta är gott och gör dig glad,\nsom en solig promenad.",
+            "Socker, kryddor och allt som är gott,\när vad du har fått.",
+            "Njut av varje liten bit,\ndet är värt all din flit.",
+            "När suget sätter in och kurrar,\när det bra att denna i munnen snurrar.",
+            "En fröjd för smaklökarna dina,\nsöta, salta och fina.",
+            "Njutningen varar en liten stund,\ni din muns saliga lund.",
+            "Unna dig något riktigt läckert,\ninslaget väldigt vackert.",
+            "Smälter i munnen, len och söt,\nbättre än tomtens julegröt.",
+            "En korg med lyx och goda grejer,\ntill både killar och tjejer.",
+            "Salt eller surt, beskt eller sött,\nhär är något du inte mött.",
+            "Dela med vänner eller ät allt själv,\nnjutning strömmar som en älv.",
+            "Till fredagsmyset eller lördagsfesten,\ndetta smakar bättre än resten.",
+            "En smakresa jorden runt,\natt banta i jul är bara strunt.",
+            "Choklad är kärlek i fast form,\ngör glädjen helt enorm.",
+            "Knaprigt, segt eller mjukt i mitten,\nhoppas du gillar banana splitten.",
+            "Dryck som värmer en frusen kropp,\ndrick ur varenda dropp.",
+            "Delikatesser av högsta klass,\nät dem nu i lugn och pass.",
+            "Frestelser som är svåra att motstå,\ndet är bara att smaka på.",
+            "Kalorier räknas inte i december,\ndet är något du måste remember.",
+            "En present som försvinner i en hast,\nhåll i asken riktigt fast.",
+            "Gammaldags godis eller nya smaker,\nhär är riktigt goda saker.",
+            "Ät, njut och var riktigt glad,\nta dig en chokladrad."
         ] 
     }
 };
@@ -451,23 +451,51 @@ function startMarqueeSequence() {
     marqueeWrapper.style.transition = ''; 
     marqueeWrapper.classList.remove('marquee-moving');
     marqueeWrapper.style.opacity = '0';
-    setTimeout(() => { initMarquee(); }, 50);
+    // Use transform: translateX(0px) initially to allow proper measurement
+    marqueeWrapper.style.transform = 'translateX(0px)';
+    
+    // Use requestAnimationFrame to ensure DOM is updated before measuring
+    requestAnimationFrame(() => {
+        setTimeout(() => { initMarquee(); }, 50);
+    });
 }
 
 function initMarquee() {
     if (!isPowered) return;
-    const logo1 = marqueeWrapper.children[0];
-    const logo2 = marqueeWrapper.children[2];
-    if(!logo1 || !logo2) return;
+    
+    // Explicitly set transform to 0 before measuring to avoid race conditions
+    marqueeWrapper.style.transform = 'translateX(0px)';
 
-    const containerW = topDisplay.getBoundingClientRect().width;
-    const logoW = logo1.getBoundingClientRect().width;
-    const startX = (containerW / 2) - (logoW / 2);
-    const distance = logo2.getBoundingClientRect().left - logo1.getBoundingClientRect().left;
+    // Ensure font is loaded to get correct widths
+    document.fonts.ready.then(() => {
+        const logo1 = marqueeWrapper.children[0];
+        const logo2 = marqueeWrapper.children[2];
+        if(!logo1 || !logo2) return;
 
-    marqueeWrapper.style.transform = `translateX(${startX}px)`;
-    setTimeout(() => { marqueeWrapper.style.opacity = '1'; }, 50);
-    marqueeTimer = setTimeout(() => { runMarqueeCycle(startX, distance); }, 2000);
+        // Get dimensions using getBoundingClientRect which accounts for rendering
+        const containerRect = topDisplay.getBoundingClientRect();
+        const logoRect = logo1.getBoundingClientRect();
+        
+        // Calculate centers
+        const containerCenter = containerRect.width / 2;
+        
+        // Current Logo Center relative to the container's left edge
+        // (Logo Left - Container Left) gives x position inside container
+        // + Logo Width / 2 gives the center point
+        const currentLogoCenter = (logoRect.left - containerRect.left) + (logoRect.width / 2);
+        
+        // Calculate offset needed: Destination (Center) - Current Position
+        const startX = containerCenter - currentLogoCenter;
+
+        // Calculate distance for the loop
+        const distance = logo2.getBoundingClientRect().left - logo1.getBoundingClientRect().left;
+
+        // Apply the transform
+        marqueeWrapper.style.transform = `translateX(${startX}px)`;
+        
+        setTimeout(() => { marqueeWrapper.style.opacity = '1'; }, 50);
+        marqueeTimer = setTimeout(() => { runMarqueeCycle(startX, distance); }, 2000);
+    });
 }
 
 function runMarqueeCycle(startX, distance) {
@@ -707,7 +735,7 @@ function toggleSound() {
         
         // Uppdatera bara texten om vi INTE spelar spel
         if (!isGaming) {
-            updateScreen(masterSoundEnabled ? "SOUND: ON" : "SOUND: OFF");
+            updateScreen(masterSoundEnabled ? "LJUD: PÅ" : "LJUD: AV");
             setTimeout(() => { 
                 if(!isRhymeDisplayed && !resultContent.classList.contains('easter-egg') && !isGaming && !isGenerating && !waitingForGameLaunch) 
                     updateScreen(currentSelection ? currentSelection.name : ""); 
@@ -729,12 +757,12 @@ function togglePower() {
         
         marqueeWrapper.style.opacity = '0'; 
         
-        updateScreen("SYSTEM CHECK...");
-        bootTimers.push(setTimeout(() => updateScreen("SYSTEM CHECK...<br>LOADING RHYME MODULE..."), 1000));
-        bootTimers.push(setTimeout(() => updateScreen("SYSTEM CHECK...<br>LOADING RHYME MODULE...<br>FEEDING REINDEER..."), 2500));
+        updateScreen("SYSTEMCHECK...");
+        bootTimers.push(setTimeout(() => updateScreen("SYSTEMCHECK...<br>LADDAR RIM-MODUL..."), 1000));
+        bootTimers.push(setTimeout(() => updateScreen("SYSTEMCHECK...<br>LADDAR RIM-MODUL...<br>MATAR RENARNA..."), 2500));
         bootTimers.push(setTimeout(() => {
             if(isPowered){
-                updateScreen("SELECT GIFT...");
+                updateScreen("VÄLJ GÅVA...");
                 startMarqueeSequence();
             }
         }, 4000));
@@ -848,7 +876,7 @@ function spawnSanta() {
     let bannerChars = [];
     
     if(showBanner) {
-        const text = "MERRY XMAS!";
+        const text = "GOD JUL!";
         for(let i=0; i<text.length; i++) {
             let t = document.createElementNS("http://www.w3.org/2000/svg", "text");
             t.textContent = text[i];
@@ -1009,7 +1037,7 @@ function action(type) {
         if (type === 'CLEAR' || type === 'BACK') {
             // "Panic button" - avsluta spelet direkt
             exitGame();
-            updateScreen("SELECT GIFT...");
+            updateScreen("VÄLJ GÅVA...");
             historyLine.textContent = "";
             historyLine.classList.remove('visible');
             historyLine.classList.remove('hidden-border');
@@ -1042,8 +1070,8 @@ function action(type) {
             updateScreen(""); 
         } else {
             const old = resultContent.textContent;
-            updateScreen("SELECT FIRST");
-            setTimeout(() => updateScreen(old === "SELECT FIRST" ? "" : old), 800);
+            updateScreen("VÄLJ FÖRST");
+            setTimeout(() => updateScreen(old === "VÄLJ FÖRST" ? "" : old), 800);
         }
     }
     else if (type === 'CLEAR') {
@@ -1056,8 +1084,8 @@ function action(type) {
         waitingForGameStart = false;
         waitingForGameLaunch = false;
         updateHistory();
-        updateScreen("CLEARED");
-        setTimeout(()=>updateScreen("SELECT GIFT..."), 1000);
+        updateScreen("RENSAT");
+        setTimeout(()=>updateScreen("VÄLJ GÅVA..."), 1000);
     }
     else if (type === 'BACK') {
         if(isGenerating) return;
@@ -1115,7 +1143,7 @@ function generateRhyme() {
         currentSelection = null;
     }
     if (historyStack.length === 0) {
-        updateScreen("NO GIFT?");
+        updateScreen("INGEN GÅVA?");
         return;
     }
     updateHistory(); 
@@ -1176,14 +1204,14 @@ function connectNorthPole() {
 // Om vi redan har kontakt, hoppa direkt till slutet
     if (isConnected) {
         sfxSuccess();
-        updateScreen("CONTACT ESTABLISHED!\nNORTH POLE ONLINE.\n\nDELIVER PACKAGES?\nPRESS [ENTER]");
+        updateScreen("KONTAKT ETABLERAD!\nNORDPOLEN ONLINE.\n\nDELA UT PAKET?\nTRYCK [ENTER]");
         waitingForGameLaunch = true;
         return;
     }
     
     isGenerating = true; 
     sfxRound();
-    updateScreen("SEARCHING NORTH POLE...");
+    updateScreen("SÖKER NORDPOLEN...");
     
     let step = 1;
     const maxSteps = 3; 
@@ -1198,9 +1226,9 @@ function connectNorthPole() {
         } else {
             sfxSuccess();
             isConnected = true;
-            updateScreen("CONTACT ESTABLISHED!\nNORTH POLE ONLINE.");
+            updateScreen("KONTAKT ETABLERAD!\nNORDPOLEN ONLINE.");
             setTimeout(() => {
-                updateScreen("CONTACT ESTABLISHED!\nNORTH POLE ONLINE.\n\nDELIVER PACKAGES?\nPRESS [ENTER]");
+                updateScreen("KONTAKT ETABLERAD!\nNORDPOLEN ONLINE.\n\nDELA UT PAKET?\nTRYCK [ENTER]");
                 waitingForGameLaunch = true;
                 isGenerating = false;
             }, 2000);
@@ -1215,35 +1243,35 @@ function showHelp() {
     resetIfRhymeDisplayed();
     sfxRound();
     
-    const helpText = "MERRY CHRISTMAS & HAPPY NEW YEAR\nWISHING YOU ALL THE BEST FROM TENGBOM!\n\n" +
+    const helpText = "GOD JUL OCH GOTT NYTT ÅR!\n\n" +
                      "=== INFO ===\n\n" +
-                     "The Christmas Rhyme Calculator is designed to save your holiday evening. " +
-                     "Let technology do the work while you sit back and enjoy your eggnog.\n\n" +
+                     "Julrimskalkylatorn är framtagen för att rädda din uppesittarkväll. " +
+                     "Låt tekniken göra jobbet medan du lutar dig tillbaka och dricker glögg.\n\n" +
                      "=== GUIDE ===\n\n" +
-                     "SELECT GIFT (0-9)\n" +
-                     "Press a symbol button to select a category. Press repeatedly to toggle specific items (e.g. press the sock symbol multiple times to switch between Socks, Slippers, Shoes etc.).\n\n" +
-                     "ADD (+)\n" +
-                     "Combine multiple gifts in one rhyme by pressing plus.\n\n" +
-                     "RHYME (ENTER)\n" +
-                     "When happy with your choices, press Enter to generate the rhyme.\n\n" +
-                     "=== BUTTONS & LEVERS ===\n\n" +
-                     "[WIFI]: Establish direct contact for special services.\n" +
-                     "[SPEAKER]: Toggle sound on/off.\n" +
-                     "[C] CLEAR: Clears memory and resets.\n" +
-                     "[<-] UNDO: Removes the last selected gift.\n" +
-                     "[!] RANDOM: Let the machine pick gifts for you.\n" +
-                     "[LEVER]: Pull the lever to adjust Christmas spirit.\n\n" +
+                     "VÄLJ GÅVA (0-9)\n" +
+                     "Tryck på en symbolknapp för att välja kategori. Tryck upprepade gånger på samma symbol för att bläddra bland specifika gåvor (t.ex. tryck på symbolen för strumpa flera gånger för att växla mellan Strumpor, Tofflor, Skor etc.).\n\n" +
+                     "LÄGG TILL (+)\n" +
+                     "Kombinera flera gåvor i samma rim genom att trycka på plus.\n\n" +
+                     "RIMMA (ENTER)\n" +
+                     "När du är nöjd med dina val, tryck Enter för att generera rimmet.\n\n" +
+                     "=== KNAPPAR & REGLAGE ===\n\n" +
+                     "[WIFI]: Etablera direktkontakt för specialtjänster.\n" +
+                     "[HÖGTALARE]: Slå av och på ljud.\n" +
+                     "[C] RENSA: Tömmer minnet och nollställer.\n" +
+                     "[<-] ÅNGRA: Tar bort den senaste valda gåvan.\n" +
+                     "[!] SLUMPA: Låt maskinen välja gåvor åt dig.\n" +
+                     "[SPAKEN]: Dra i spaken för att justera julstämning.\n\n" +
                      "=== TIPS ===\n\n" +
-                     "Not happy with the rhyme? Just press ENTER again for a new attempt. The machine has many combinations in store.\n\n" +
-                     "=== DISCLAIMER ===\n\n" +
-                     "This machine runs on experimental holiday magic (v1.0). Tengbom AB is not responsible for rhyme quality, grammar glitches, or recipient disappointment.\n\n" +
-                     "The system may contain traces of nuts and bugs. Technical errors should be reported directly to Santa via the nearest chimney.\n\n" +
+                     "Är du missnöjd med rimmet? Tryck bara på ENTER igen så gör motorn ett nytt försök med samma gåvor. Maskinen har många kombinationer på lager.\n\n" +
+                     "=== ANSVARSFRISKRIVNING ===\n\n" +
+                     "Denna maskin drivs av experimentell julmagi (v1.0). Tengbom AB ansvarar ej för rimmens kvalitet, grammatiska tveksamheter eller mottagarens eventuella besvikelse.\n\n" +
+                     "Systemet kan innehålla spår av buggar och nötter. Tekniska fel rapporteras direkt till Tomten via närmaste skorsten.\n\n" +
                      "=== CREDITS & INSPIRATION ===\n\n" +
-                     "Code Engine: MIT License (Open Source).\n" +
-                     "Graphics: CC BY 4.0.\n" +
-                     "The code is free to use and build upon. See source code for details.\n\n" +
-                     "The design is a humble tribute to Teenage Engineering (TE) and their fantastic design language.\n" +
-                     "(NOTE: This is an independent project with no official connection to TE).";
+                     "Kodmotor: MIT License (Open Source).\n" +
+                     "Grafik: CC BY 4.0.\n" +
+                     "Koden är fri att använda och bygga vidare på. Se källkoden för detaljer.\n\n" +
+                     "Designen är en ödmjuk hyllning till Teenage Engineering (TE) och deras fantastiska formspråk.\n" +
+                     "(OBS: Detta är ett fristående projekt utan officiell koppling till TE).";
                      
     updateScreen(helpText);
 }
@@ -1258,14 +1286,14 @@ function initFlappyTitle() {
     
     gameOverlayContent.innerHTML = `
         <text x="117" y="145" text-anchor="middle" fill="#ECB328" font-family="VT323" font-size="24">FLAPPY SANTA</text>
-        <text x="117" y="165" text-anchor="middle" fill="#ECB328" font-family="VT323" font-size="14">PRESS [+] TO START</text>
+        <text x="117" y="165" text-anchor="middle" fill="#ECB328" font-family="VT323" font-size="14">TRYCK [+] FÖR ATT STARTA</text>
     `;
 
     snowLayer.innerHTML = ""; 
     renderSnow(2); 
     pipeLayer.innerHTML = "";
     historyLine.classList.add('hidden-border'); 
-    historyLine.textContent = "LOADING...";
+    historyLine.textContent = "LADDAR...";
     historyLine.classList.add('visible');
     updateScreen("");
     
@@ -1476,9 +1504,9 @@ function gameOver() {
     gameOverlay.style.display = 'block';
     gameOverlayContent.innerHTML = `
         <text x="117" y="115" text-anchor="middle" fill="#ECB328" font-family="VT323" font-size="20">GAME OVER</text>
-        <text x="117" y="128" text-anchor="middle" fill="#ECB328" font-family="VT323" font-size="12">YOUR SCORE: ${score}</text>
+        <text x="117" y="128" text-anchor="middle" fill="#ECB328" font-family="VT323" font-size="12">DIN POÄNG: ${score}</text>
         ${hsHtml}
-        <text x="117" y="200" text-anchor="middle" fill="#ECB328" font-family="VT323" font-size="12">[ENTER] PLAY AGAIN  |  [C] EXIT</text>
+        <text x="117" y="200" text-anchor="middle" fill="#ECB328" font-family="VT323" font-size="12">[ENTER] SPELA IGEN  |  [C] AVSLUTA</text>
     `;
     
     updateScreen(""); 
@@ -1506,7 +1534,7 @@ function exitGame() {
 
 window.addEventListener('load', () => {
     // Easter Egg: Credits i konsolen
-    console.log("%c Christmas Rhyme Calculator built by Andreas Nordström aka HandyMan ", "background: #222; color: #ECB328; font-size: 12px; padding: 4px; border-radius: 4px;");
+    console.log("%c Julrimskalkylatorn byggd av Andreas Nordström aka HandyMan ", "background: #222; color: #ECB328; font-size: 12px; padding: 4px; border-radius: 4px;");
     
     togglePower(); 
     masterSoundEnabled = false; 
